@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>@hasSection('title')@yield('title') - @endif{{ config('app.name', 'Laravel') }}</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="author" content="surfside media" />
     <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico') }}" type="image/x-icon">
@@ -325,13 +325,22 @@
         </div>
   
         <div class="border-top mt-auto pb-2">
-          <div class="customer-links container mt-4 mb-2 pb-1">
+          <a href="{{ auth()->check() ? route('home') : route('login') }}"
+            class="customer-links container mt-4 mb-2 pb-1 d-block text-decoration-none">
             <svg class="d-inline-block align-middle" width="20" height="20" viewBox="0 0 20 20" fill="none"
               xmlns="http://www.w3.org/2000/svg">
               <use href="#icon_user" />
             </svg>
-            <span class="d-inline-block ms-2 text-uppercase align-middle fw-medium">My Account</span>
-          </div>
+            <span class="d-inline-block ms-2 text-uppercase align-middle fw-medium">
+              {{ auth()->check() ? Auth::user()->name : 'My Account' }}
+            </span>
+          </a>
+          @auth
+            <form method="POST" action="{{ route('logout') }}" class="container mb-2">
+              @csrf
+              <button type="submit" class="btn-link default-underline fw-medium text-uppercase p-0">Logout</button>
+            </form>
+          @endauth
           <ul class="container social-links list-unstyled d-flex flex-wrap mb-0">
             <li>
               <a href="#" class="footer__social-link d-block ps-0">
@@ -455,14 +464,39 @@
               </div>
             </div>
   
-            <div class="header-tools__item hover-container">
-              <a href="login.html" class="header-tools__item">
-                <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <use href="#icon_user" />
-                </svg>
-              </a>
-            </div>
+            @auth
+              <div class="header-tools__item dropdown">
+                <a href="#" class="header-tools__item" id="accountDropdown" role="button" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <use href="#icon_user" />
+                  </svg>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">
+                  <li><span class="dropdown-item-text text-secondary">{{ Auth::user()->name }}</span></li>
+                  <li>
+                    <hr class="dropdown-divider">
+                  </li>
+                  <li><a class="dropdown-item" href="{{ route('home') }}">My Account</a></li>
+                  <li>
+                    <form method="POST" action="{{ route('logout') }}">
+                      @csrf
+                      <button type="submit" class="dropdown-item">Logout</button>
+                    </form>
+                  </li>
+                </ul>
+              </div>
+            @else
+              <div class="header-tools__item hover-container">
+                <a href="{{ route('login') }}" class="header-tools__item">
+                  <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <use href="#icon_user" />
+                  </svg>
+                </a>
+              </div>
+            @endauth
   
             <a href="wishlist.html" class="header-tools__item">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
