@@ -17,3 +17,72 @@
 .form-floating>.form-select {
     height: 48px;
 }
+
+/* ---------------- Auth Pages (Login / Register / Password) ---------------- */
+.auth-page {
+    padding: 0;
+}
+
+.auth-page__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+@media (min-width: 992px) {
+    .auth-page__grid {
+        grid-template-columns: 1.05fr 1fr;
+        min-height: 42rem;
+    }
+}
+
+.auth-page__visual {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    padding: 3rem;
+}
+
+.auth-page__visual::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(20, 20, 20, .35) 0%, rgba(20, 20, 20, .6) 100%);
+}
+
+.auth-page__visual-overlay {
+    position: relative;
+    z-index: 1;
+}
+
+.auth-page__logo-img {
+    max-width: 150px;
+    filter: brightness(0) invert(1);
+}
+
+.auth-page__visual-text h2 {
+    max-width: 22rem;
+}
+
+.auth-page__note {
+    font-size: .8125rem;
+}
+
+.auth-page__form-wrap {
+    padding: 3rem 1.25rem;
+    background-color: #fff;
+}
+
+@media (min-width: 992px) {
+    .auth-page__form-wrap {
+        padding: 4rem 3rem;
+    }
+}
+
+.auth-page__form {
+    max-width: 25rem;
+    margin: 0 auto;
+}
+
+.auth-form .btn {
+    letter-spacing: .06em;
+}
