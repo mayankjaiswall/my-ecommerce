@@ -25,7 +25,7 @@
         style="background-image: url('{{ asset(trim($__env->yieldContent('auth-image', 'assets/images/home/demo3/category_9.jpg'))) }}')">
         <div class="auth-page__visual-overlay">
           <a href="{{ url('/') }}" class="auth-page__logo" aria-label="{{ config('app.name', 'Laravel') }} home">
-            <img src="{{ asset('assets/images/logo.png') }}" alt="{{ config('app.name', 'Laravel') }}" class="auth-page__logo-img" />
+            <x-logo light class="auth-page__logo-img" />
           </a>
 
           <div class="auth-page__visual-text">
@@ -49,7 +49,7 @@
       <section class="auth-page__form-wrap">
         <div class="auth-page__mobile-brand d-lg-none">
           <a href="{{ url('/') }}" aria-label="{{ config('app.name', 'Laravel') }} home">
-            <img src="{{ asset('assets/images/logo.png') }}" alt="{{ config('app.name', 'Laravel') }}" />
+            <x-logo class="auth-page__mobile-brand-logo" />
           </a>
         </div>
 

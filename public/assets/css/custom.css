@@ -76,7 +76,6 @@
 
 .auth-page__logo-img {
     max-width: 165px;
-    filter: brightness(0) invert(1);
 }
 
 .auth-page__visual-text {
@@ -148,7 +147,8 @@
     text-align: center;
 }
 
-.auth-page__mobile-brand img {
+.auth-page__mobile-brand img,
+.auth-page__mobile-brand-logo {
     max-width: 155px;
 }
 
