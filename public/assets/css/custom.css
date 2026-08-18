@@ -205,3 +205,18 @@
         max-width: 100%;
     }
 }
+
+/* ---------------- Home Hero Slideshow (Mobile) ---------------- */
+@media (max-width: 767.98px) {
+    .slideshow {
+        height: 26rem;
+    }
+
+    .slideshow .slideshow-text {
+        top: 32%;
+    }
+
+    .slideshow .slideshow-character {
+        bottom: 0;
+    }
+}
