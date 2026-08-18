@@ -8,6 +8,7 @@
   <title>@hasSection('title')@yield('title') - @endif{{ config('app.name', 'Laravel') }}</title>
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   <meta name="author" content="surfside media" />
+  <link rel="icon" href="{{ asset('assets/images/favicon.svg') }}" type="image/svg+xml">
   <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}" type="image/x-icon">
   <link rel="preconnect" href="https://fonts.gstatic.com/">
   <link
