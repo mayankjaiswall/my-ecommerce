@@ -26,6 +26,11 @@
                 <div class="pc__img-wrapper">
                   <img loading="lazy" src="{{ asset('assets/images/home/demo3/' . $product['img']) }}" width="330"
                     height="400" alt="{{ $product['name'] }}" class="pc__img">
+                  <button type="button" class="wishlist-toggle-btn js-add-wishlist" title="Add To Wishlist">
+                    <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <use href="#icon_heart" />
+                    </svg>
+                  </button>
                 </div>
 
                 <div class="pc__info position-relative">
