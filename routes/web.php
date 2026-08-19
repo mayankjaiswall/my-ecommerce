@@ -23,3 +23,5 @@ Route::view('/cart', 'cart')->name('cart');
 Route::view('/about', 'about')->name('about');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
+Route::view('/privacy-policy', 'privacy-policy')->name('privacy-policy');
+Route::view('/terms-conditions', 'terms-conditions')->name('terms-conditions');

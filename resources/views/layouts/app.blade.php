@@ -606,7 +606,7 @@
               </li>
               <li class="sub-menu__item"><a href="store_location.html" class="menu-link menu-link_us-s">Find a Store</a>
               </li>
-              <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Legal & Privacy</a></li>
+              <li class="sub-menu__item"><a href="{{ route('privacy-policy') }}" class="menu-link menu-link_us-s">Legal & Privacy</a></li>
               <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Gift Card</a></li>
             </ul>
           </div>
@@ -626,10 +626,10 @@
   
       <div class="footer-bottom">
         <div class="container d-md-flex align-items-center">
-          <span class="footer-copyright me-auto">©2024 Surfside Media</span>
+          <span class="footer-copyright me-auto">&copy;{{ now()->year }} Surfside Media. All rights reserved.</span>
           <div class="footer-settings d-md-flex align-items-center">
-            <a href="privacy-policy.html">Privacy Policy</a> &nbsp;|&nbsp; <a href="terms-conditions.html">Terms &amp;
-              Conditions</a>
+            <a href="{{ route('privacy-policy') }}">Privacy Policy</a> &nbsp;|&nbsp;
+            <a href="{{ route('terms-conditions') }}">Terms &amp; Conditions</a>
           </div>
         </div>
       </div>
