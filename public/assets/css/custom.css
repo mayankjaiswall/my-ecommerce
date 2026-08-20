@@ -220,3 +220,103 @@
         bottom: 0;
     }
 }
+
+/* ---------------- Wishlist ---------------- */
+.pc__btn-wl svg,
+.wishlist-toggle-btn svg {
+    transition: transform .2s ease, fill .2s ease;
+}
+
+.pc__btn-wl.active svg,
+.wishlist-toggle-btn.active svg {
+    fill: #d6001c;
+    transform: scale(1.12);
+}
+
+.wishlist-toggle-btn {
+    position: absolute;
+    top: .75rem;
+    right: .75rem;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0;
+    background-color: #fff;
+    border: 0;
+    border-radius: 50%;
+    color: #767676;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .12);
+    transition: color .2s ease, transform .2s ease;
+}
+
+.wishlist-toggle-btn:hover {
+    color: #d6001c;
+    transform: scale(1.08);
+}
+
+.wishlist-toggle-btn.active {
+    color: #d6001c;
+}
+
+.wishlist-remove-btn {
+    position: absolute;
+    top: .75rem;
+    left: .75rem;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0;
+    background-color: #fff;
+    border: 0;
+    border-radius: 50%;
+    color: #767676;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .12);
+    transition: color .2s ease, transform .2s ease;
+}
+
+.wishlist-remove-btn:hover {
+    color: #d6001c;
+    transform: scale(1.08);
+}
+
+.wishlist-empty svg {
+    color: #b9a16b;
+}
+
+.wishlist-toast {
+    position: fixed;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    gap: .625rem;
+    max-width: calc(100vw - 3rem);
+    padding: .875rem 1.25rem;
+    background-color: #1f1f1f;
+    color: #fff;
+    font-size: .875rem;
+    border-radius: .5rem;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, .22);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(.75rem);
+    transition: opacity .25s ease, transform .25s ease, visibility .25s ease;
+}
+
+.wishlist-toast.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.wishlist-toast__icon {
+    flex-shrink: 0;
+    color: #d6001c;
+}

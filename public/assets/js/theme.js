@@ -1343,14 +1343,6 @@ function pureFadeOut(e) {
     document.querySelector(this.getAttribute("href")).click();
   });
 
-  $('button.js-add-wishlist, a.add-to-wishlist').off('click').on('click', function() {
-    if($(this).hasClass("active"))
-      $(this).removeClass("active");
-    else
-      $(this).addClass("active");
-    return false;
-  });
-
   if($('[data-fancybox="gallery"]').length > 0) {
     $('[data-fancybox="gallery"]').fancybox({
       backFocus: false
