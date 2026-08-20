@@ -257,6 +257,29 @@
       .logo__image {
         max-width: 220px;
       }
+
+      .header-tools__wishlist {
+        position: relative;
+      }
+
+      .header-tools__wishlist .wishlist-amount {
+        top: calc(0.25rem + 1em);
+        left: calc(0.5rem + 1.4em);
+        width: 1rem;
+        height: 1rem;
+        border-radius: 100%;
+        background: #b9a16b;
+        color: #ffffff;
+        font-size: 0.625rem;
+        line-height: 1rem;
+        text-align: center;
+      }
+
+      .header-tools__wishlist.is-active,
+      .pc__btn-wl.active,
+      .wishlist-toggle-btn.active {
+        color: #d6001c;
+      }
     </style>
     <div class="header-mobile header_sticky">
       <div class="container d-flex align-items-center h-100">
@@ -499,10 +522,11 @@
               </div>
             @endauth
   
-            <a href="wishlist.html" class="header-tools__item">
+            <a href="{{ route('wishlist') }}" class="header-tools__item header-tools__wishlist">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <use href="#icon_heart" />
               </svg>
+              <span class="wishlist-amount d-block position-absolute js-wishlist-count">0</span>
             </a>
   
             <a href="{{ route('cart') }}" class="header-tools__item header-tools__cart">
@@ -659,13 +683,13 @@
         </div>
   
         <div class="col-4">
-          <a href="index.html" class="footer-mobile__link d-flex flex-column align-items-center">
+          <a href="{{ route('wishlist') }}" class="footer-mobile__link d-flex flex-column align-items-center">
             <div class="position-relative">
               <svg class="d-block" width="18" height="18" viewBox="0 0 20 20" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <use href="#icon_heart" />
               </svg>
-              <span class="wishlist-amount d-block position-absolute js-wishlist-count">3</span>
+              <span class="wishlist-amount d-block position-absolute js-wishlist-count">0</span>
             </div>
             <span>Wishlist</span>
           </a>
@@ -682,5 +706,6 @@
     <script src="{{ asset('assets/js/plugins/swiper.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/countdown.js') }}"></script>
     <script src="{{ asset('assets/js/theme.js')}}"></script>
+    <script src="{{ asset('assets/js/wishlist.js') }}"></script>
   </body>
 </html>
