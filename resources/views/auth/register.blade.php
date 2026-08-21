@@ -13,7 +13,9 @@
         <h2 class="mb-0">Create Account</h2>
     </div>
 
-    <form method="POST" action="{{ route('register') }}" class="auth-form">
+    <div class="alert alert-danger d-none" data-auth-general-error role="alert"></div>
+
+    <form method="POST" action="{{ route('register') }}" class="auth-form" data-auth-form="register">
         @csrf
 
         <div class="form-floating mb-3">
@@ -27,6 +29,7 @@
                     <strong>{{ $message }}</strong>
                 </span>
             @enderror
+            <div class="invalid-feedback" data-field-error="name"></div>
         </div>
 
         <div class="form-floating mb-3">
@@ -40,6 +43,7 @@
                     <strong>{{ $message }}</strong>
                 </span>
             @enderror
+            <div class="invalid-feedback" data-field-error="email"></div>
         </div>
 
         <div class="form-floating mb-3">
@@ -52,12 +56,14 @@
                     <strong>{{ $message }}</strong>
                 </span>
             @enderror
+            <div class="invalid-feedback" data-field-error="password"></div>
         </div>
 
         <div class="form-floating mb-4">
             <input id="password-confirm" type="password" class="form-control" name="password_confirmation"
                 required autocomplete="new-password" placeholder="Confirm password">
             <label for="password-confirm">{{ __('Confirm Password') }}</label>
+            <div class="invalid-feedback" data-field-error="password_confirmation"></div>
         </div>
 
         <button type="submit" class="btn btn-dark w-100 text-uppercase fw-medium py-3">
