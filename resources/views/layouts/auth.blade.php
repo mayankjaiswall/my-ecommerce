@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="{{ asset('assets/css/plugins/swiper.min.css') }}" type="text/css" />
   <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" type="text/css" />
   <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}" type="text/css" />
+  @vite(['resources/js/app.js'])
 </head>
 <body class="auth-body">
   <main class="auth-page">
