@@ -19,7 +19,9 @@
         </div>
     @endif
 
-    <form method="POST" action="{{ route('login') }}" class="auth-form">
+    <div class="alert alert-danger d-none" data-auth-general-error role="alert"></div>
+
+    <form method="POST" action="{{ route('login') }}" class="auth-form" data-auth-form="login">
         @csrf
 
         <div class="form-floating mb-3">
@@ -33,6 +35,7 @@
                     <strong>{{ $message }}</strong>
                 </span>
             @enderror
+            <div class="invalid-feedback" data-field-error="email"></div>
         </div>
 
         <div class="form-floating mb-3">
@@ -45,6 +48,7 @@
                     <strong>{{ $message }}</strong>
                 </span>
             @enderror
+            <div class="invalid-feedback" data-field-error="password"></div>
         </div>
 
         <div class="d-flex align-items-center justify-content-between mb-4">
