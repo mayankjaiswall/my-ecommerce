@@ -349,7 +349,7 @@
         </div>
   
         <div class="border-top mt-auto pb-2">
-          <a href="{{ auth()->check() ? route('home') : route('login') }}"
+          <a href="{{ auth()->check() ? route('account') : route('login') }}"
             class="customer-links container mt-4 mb-2 pb-1 d-block text-decoration-none">
             <svg class="d-inline-block align-middle" width="20" height="20" viewBox="0 0 20 20" fill="none"
               xmlns="http://www.w3.org/2000/svg">
@@ -502,7 +502,7 @@
                   <li>
                     <hr class="dropdown-divider">
                   </li>
-                  <li><a class="dropdown-item" href="{{ route('home') }}">My Account</a></li>
+                  <li><a class="dropdown-item" href="{{ route('account') }}">My Account</a></li>
                   <li>
                     <form method="POST" action="{{ route('logout') }}">
                       @csrf
@@ -626,7 +626,7 @@
             <h6 class="sub-menu__title text-uppercase">Help</h6>
             <ul class="sub-menu__list list-unstyled">
               <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Customer Service</a></li>
-              <li class="sub-menu__item"><a href="account_dashboard.html" class="menu-link menu-link_us-s">My Account</a>
+              <li class="sub-menu__item"><a href="{{ route('account') }}" class="menu-link menu-link_us-s">My Account</a>
               </li>
               <li class="sub-menu__item"><a href="store_location.html" class="menu-link menu-link_us-s">Find a Store</a>
               </li>
