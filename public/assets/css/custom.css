@@ -18,6 +18,63 @@
     height: 48px;
 }
 
+/* ---------------- Footer Mobile Alignment ---------------- */
+@media (max-width: 767.98px) {
+    .footer_type_2 .footer-middle,
+    .footer_type_2 .footer-bottom {
+        text-align: center;
+    }
+
+    .footer_type_2 .footer-middle .row {
+        justify-content: center;
+    }
+
+    .footer_type_2 .footer-column {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer_type_2 .footer-store-info {
+        max-width: 22rem;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .footer_type_2 .footer-middle .logo {
+        margin-bottom: 1.75rem;
+    }
+
+    .footer_type_2 .footer .social-links,
+    .footer_type_2 .social-links {
+        justify-content: center;
+        margin-left: 0;
+    }
+
+    .footer_type_2 .footer__social-link {
+        padding-right: .75rem;
+        padding-left: .75rem;
+    }
+
+    .footer_type_2 .sub-menu__list {
+        width: 100%;
+    }
+
+    .footer_type_2 .footer-bottom .container {
+        justify-content: center;
+    }
+
+    .footer_type_2 .footer-copyright {
+        display: block;
+        margin-right: 0 !important;
+        margin-bottom: .5rem;
+    }
+
+    .footer_type_2 .footer-settings {
+        justify-content: center;
+    }
+}
+
 /* ---------------- Auth Pages (Login / Register / Password) ---------------- */
 .auth-body {
     min-height: 100vh;
@@ -450,6 +507,40 @@
 }
 
 @media (max-width: 575.98px) {
+    .my-account {
+        text-align: center;
+    }
+
+    .my-account .account-sidebar {
+        max-width: 22rem;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .my-account .account-sidebar .menu-link {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .my-account .account-sidebar .menu-link::before {
+        left: .75rem;
+    }
+
+    .my-account .page-content {
+        max-width: 22rem;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .my-account__dashboard p {
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .my-account .my-account__dashboard .border {
+        text-align: center;
+    }
+
     .account-info-card {
         grid-template-columns: 1fr;
     }
