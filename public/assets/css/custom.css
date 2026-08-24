@@ -320,3 +320,137 @@
     flex-shrink: 0;
     color: #d6001c;
 }
+
+/* ---------------- Account Sidebar ---------------- */
+.my-account .account-sidebar {
+    gap: .5rem;
+    padding: 1.25rem;
+    background-color: #fbfaf8;
+    border: 1px solid #ece7df;
+    border-radius: .5rem;
+}
+
+.my-account .account-sidebar li {
+    width: 100%;
+}
+
+.my-account .account-sidebar .menu-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 3rem;
+    padding: .875rem 1rem .875rem 1.125rem !important;
+    color: #4f4b47;
+    background-color: transparent;
+    border-radius: .375rem;
+    line-height: 1.25;
+    text-align: left;
+    text-decoration: none;
+    transition: background-color .2s ease, color .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+
+.my-account .account-sidebar .menu-link::before {
+    content: "";
+    position: absolute;
+    top: .75rem;
+    bottom: .75rem;
+    left: .5rem;
+    width: 3px;
+    background-color: transparent;
+    border-radius: 99px;
+    transition: background-color .2s ease;
+}
+
+.my-account .account-sidebar .menu-link:hover,
+.my-account .account-sidebar .menu-link:focus {
+    color: #1f1f1f;
+    background-color: #fff;
+    box-shadow: 0 8px 20px rgba(31, 31, 31, .08);
+    transform: translateX(.25rem);
+}
+
+.my-account .account-sidebar .menu-link:focus-visible {
+    outline: 2px solid #1f1f1f;
+    outline-offset: 2px;
+}
+
+.my-account .account-sidebar .menu-link:hover::before,
+.my-account .account-sidebar .menu-link:focus::before,
+.my-account .account-sidebar .menu-link.menu-link_active::before {
+    background-color: #c32929;
+}
+
+.my-account .account-sidebar .menu-link.menu-link_active {
+    pointer-events: auto;
+    color: #c32929;
+    background-color: #fff;
+    box-shadow: 0 8px 20px rgba(195, 41, 41, .1);
+}
+
+.my-account .account-sidebar__logout {
+    cursor: pointer;
+}
+
+.account-panel {
+    animation: accountPanelFade .18s ease;
+}
+
+.account-info-card,
+.account-empty-state {
+    padding: 1.75rem;
+    background-color: #fff;
+    border: 1px solid #e8e3dc;
+    border-radius: .5rem;
+}
+
+.account-info-card {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+}
+
+.account-info-card__label {
+    display: block;
+    margin-bottom: .5rem;
+    color: #767676;
+    font-size: .75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.account-info-card__value {
+    display: block;
+    color: #1f1f1f;
+    font-weight: 500;
+}
+
+@keyframes accountPanelFade {
+    from {
+        opacity: 0;
+        transform: translateY(.35rem);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 991.98px) {
+    .my-account .account-sidebar {
+        padding: .75rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .my-account .account-sidebar .menu-link:hover,
+    .my-account .account-sidebar .menu-link:focus {
+        transform: none;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .account-info-card {
+        grid-template-columns: 1fr;
+    }
+}
