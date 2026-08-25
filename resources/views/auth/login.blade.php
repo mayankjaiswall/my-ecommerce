@@ -38,10 +38,11 @@
             <div class="invalid-feedback" data-field-error="email"></div>
         </div>
 
-        <div class="form-floating mb-3">
+        <div class="form-floating mb-3 password-field">
             <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
                 name="password" required autocomplete="current-password" placeholder="Password">
             <label for="password">{{ __('Password') }}</label>
+            @include('auth.partials.password-toggle')
 
             @error('password')
                 <span class="invalid-feedback" role="alert">
