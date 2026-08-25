@@ -31,10 +31,11 @@
             @enderror
         </div>
 
-        <div class="form-floating mb-3">
+        <div class="form-floating mb-3 password-field">
             <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
                 name="password" required autocomplete="new-password" placeholder="Password">
             <label for="password">{{ __('Password') }}</label>
+            @include('auth.partials.password-toggle')
 
             @error('password')
                 <span class="invalid-feedback" role="alert">
@@ -43,10 +44,11 @@
             @enderror
         </div>
 
-        <div class="form-floating mb-4">
+        <div class="form-floating mb-4 password-field">
             <input id="password-confirm" type="password" class="form-control" name="password_confirmation"
                 required autocomplete="new-password" placeholder="Confirm password">
             <label for="password-confirm">{{ __('Confirm Password') }}</label>
+            @include('auth.partials.password-toggle')
         </div>
 
         <button type="submit" class="btn btn-dark w-100 text-uppercase fw-medium py-3">

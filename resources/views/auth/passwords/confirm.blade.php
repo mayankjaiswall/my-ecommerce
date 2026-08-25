@@ -17,10 +17,11 @@
     <form method="POST" action="{{ route('password.confirm') }}" class="auth-form">
         @csrf
 
-        <div class="form-floating mb-4">
+        <div class="form-floating mb-4 password-field">
             <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
                 name="password" required autocomplete="current-password" placeholder="Password">
             <label for="password">{{ __('Password') }}</label>
+            @include('auth.partials.password-toggle')
 
             @error('password')
                 <span class="invalid-feedback" role="alert">
