@@ -34,12 +34,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/account', [AccountController::class, 'index'])->name('account');
 });
 
-Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('login');
-    Route::post('/login', [AdminAuthController::class, 'login'])->name('login.submit');
+Route::get('/admin', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
+Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login.submit');
 
-    Route::middleware('admin')->group(function () {
-        Route::post('/logout', [AdminAuthController::class, 'logout'])->name('logout');
-        Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
-    });
+Route::middleware('admin')->group(function () {
+    Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
+    Route::get('/admin-dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
 });
