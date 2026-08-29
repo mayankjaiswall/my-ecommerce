@@ -69,13 +69,13 @@
             </nav>
 
             <div class="admin-sidebar__footer">
-                <div class="admin-sidebar__user">
+                <a href="{{ route('admin.profile.edit') }}" class="admin-sidebar__user admin-sidebar__user--link">
                     <span class="admin-avatar">{{ strtoupper(substr($user->name ?? 'A', 0, 1)) }}</span>
                     <div>
                         <div class="admin-sidebar__user-name">{{ $user->name }}</div>
                         <div class="admin-sidebar__user-role">{{ $user->email }}</div>
                     </div>
-                </div>
+                </a>
 
                 <form method="POST" action="{{ route('admin.logout') }}">
                     @csrf
@@ -110,7 +110,9 @@
                         </svg>
                         <span>Administrator</span>
                     </span>
-                    <span class="admin-avatar">{{ strtoupper(substr($user->name ?? 'A', 0, 1)) }}</span>
+                    <a href="{{ route('admin.profile.edit') }}" class="admin-avatar admin-avatar--link" title="Edit profile" aria-label="Edit profile">
+                        {{ strtoupper(substr($user->name ?? 'A', 0, 1)) }}
+                    </a>
                 </div>
             </header>
 
