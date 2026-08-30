@@ -36,6 +36,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/admin', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
+Route::redirect('/admin/login', '/admin');
 Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login.submit');
 
 Route::middleware('admin')->group(function () {

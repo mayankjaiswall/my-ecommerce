@@ -116,6 +116,44 @@
         linear-gradient(180deg, rgba(20, 20, 20, .18) 0%, rgba(20, 20, 20, .72) 100%);
 }
 
+.auth-page__visual--restricted {
+    background:
+        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, .06), transparent 45%),
+        linear-gradient(160deg, #17171d 0%, #1f1f27 50%, #0b0b0e 100%);
+}
+
+.auth-page__visual--restricted::before {
+    background: linear-gradient(180deg, rgba(0, 0, 0, .1) 0%, rgba(0, 0, 0, .35) 100%);
+}
+
+.auth-page__visual-watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 0;
+    width: 26rem;
+    height: 26rem;
+    color: #fff;
+    opacity: .05;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.auth-page__restricted-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: .3rem .75rem;
+    margin-bottom: 1rem;
+    font-size: .75rem;
+    font-weight: 500;
+    letter-spacing: .06em;
+    color: #fff;
+    text-transform: uppercase;
+    background-color: rgba(255, 255, 255, .1);
+    border: 1px solid rgba(255, 255, 255, .3);
+    border-radius: 2rem;
+}
+
 .auth-page__visual-overlay {
     position: relative;
     z-index: 1;
