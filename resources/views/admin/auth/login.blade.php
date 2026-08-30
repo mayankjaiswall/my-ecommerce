@@ -2,10 +2,11 @@
 
 @section('title', 'Admin Sign In')
 
-@section('auth-image', 'assets/images/home/demo3/category_9.jpg')
-@section('auth-eyebrow', 'Admin Portal')
-@section('auth-heading', 'Welcome Back, Admin')
-@section('auth-subheading', 'Sign in with your administrator credentials to manage the store.')
+@section('auth-variant', 'restricted')
+@section('auth-eyebrow', 'Restricted Access')
+@section('auth-heading', 'Owner & Admin Access')
+@section('auth-subheading', 'This portal is reserved for the website owner and authorized administrators only.')
+@section('auth-badge-text', 'Unauthorized access attempts are logged and monitored.')
 
 @section('auth-content')
     <div class="mb-4">
