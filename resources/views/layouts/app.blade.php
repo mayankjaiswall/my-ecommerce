@@ -412,47 +412,35 @@
       </nav>
     </div>
   
-    <header id="header" class="header header-fullwidth header-transparent-bg">
+    <header id="header" class="header header-fullwidth header-transparent-bg site-header">
       <div class="container">
-        <div class="header-desk header-desk_type_1">
-          <div class="logo">
+       <div class="header-top">
+        <div class="site-header__top">
+          <button type="button" class="site-header__burger js-open-aside" data-aside="navDrawer" aria-label="Open menu">
+            <svg class="d-block" width="22" height="16" viewBox="0 0 25 18" xmlns="http://www.w3.org/2000/svg">
+              <use href="#icon_nav" />
+            </svg>
+          </button>
+
+          <div class="logo site-header__logo">
             <a href="{{ route('home') }}">
               <x-logo class="logo__image d-block" />
             </a>
           </div>
-  
-          <nav class="navigation">
-            <ul class="navigation__list list-unstyled d-flex">
-              <li class="navigation__item">
-                <a href="{{ route('home') }}" class="navigation__link">Home</a>
-              </li>
-              <li class="navigation__item">
-                <a href="{{ route('shop') }}" class="navigation__link">Shop</a>
-              </li>
-              <li class="navigation__item">
-                <a href="{{ route('cart') }}" class="navigation__link">Cart</a>
-              </li>
-              <li class="navigation__item">
-                <a href="{{ route('about') }}" class="navigation__link">About</a>
-              </li>
-              <li class="navigation__item">
-                <a href="{{ route('contact') }}" class="navigation__link">Contact</a>
-              </li>
-            </ul>
-          </nav>
-  
-          <div class="header-tools d-flex align-items-center">
-            <div class="header-tools__item hover-container">
-              <div class="js-hover__open position-relative">
-                <a class="js-search-popup search-field__actor" href="#">
-                  <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
+
+          <div class="site-header__actions d-flex align-items-center">
+            <div class="header-tools__item hover-container site-header__search">
+              <div class="js-hover__open position-relative w-100">
+                <a class="js-search-popup search-field__actor site-header__search-trigger d-flex align-items-center" href="#">
+                  <svg class="d-block" width="16" height="16" viewBox="0 0 20 20" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <use href="#icon_search" />
                   </svg>
+                  <span class="site-header__search-placeholder">Search products</span>
                   <i class="btn-icon btn-close-lg"></i>
                 </a>
               </div>
-  
+
               <div class="search-popup js-hidden-content">
                 <form action="#" method="GET" class="search-field container">
                   <p class="text-uppercase text-secondary fw-medium mb-4">What are you looking for?</p>
@@ -467,31 +455,31 @@
                     </button>
                     <button class="btn-icon btn-close-lg search-popup__reset" type="reset"></button>
                   </div>
-  
+
                   <div class="search-popup__results">
                     <div class="sub-menu search-suggestion">
                       <h6 class="sub-menu__title fs-base">Quicklinks</h6>
                       <ul class="sub-menu__list list-unstyled">
-                        <li class="sub-menu__item"><a href="shop2.html" class="menu-link menu-link_us-s">New Arrivals</a>
+                        <li class="sub-menu__item"><a href="{{ route('shop') }}" class="menu-link menu-link_us-s">New Arrivals</a>
                         </li>
                         <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Dresses</a></li>
-                        <li class="sub-menu__item"><a href="shop3.html" class="menu-link menu-link_us-s">Accessories</a>
+                        <li class="sub-menu__item"><a href="{{ route('shop') }}" class="menu-link menu-link_us-s">Accessories</a>
                         </li>
                         <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Footwear</a></li>
                         <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Sweatshirt</a></li>
                       </ul>
                     </div>
-  
+
                     <div class="search-result row row-cols-5"></div>
                   </div>
                 </form>
               </div>
             </div>
-  
+
             @auth
-              <div class="header-tools__item dropdown">
-                <a href="#" class="header-tools__item" id="accountDropdown" role="button" data-bs-toggle="dropdown"
-                  aria-expanded="false">
+              <div class="dropdown">
+                <a href="#" class="header-tools__item site-header__icon-btn" id="accountDropdown" role="button" data-bs-toggle="dropdown"
+                  aria-expanded="false" aria-label="Account">
                   <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <use href="#icon_user" />
@@ -512,24 +500,22 @@
                 </ul>
               </div>
             @else
-              <div class="header-tools__item hover-container">
-                <a href="{{ route('login') }}" class="header-tools__item">
-                  <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <use href="#icon_user" />
-                  </svg>
-                </a>
-              </div>
+              <a href="{{ route('login') }}" class="header-tools__item site-header__icon-btn" aria-label="Account">
+                <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <use href="#icon_user" />
+                </svg>
+              </a>
             @endauth
-  
-            <a href="{{ route('wishlist') }}" class="header-tools__item header-tools__wishlist">
+
+            <a href="{{ route('wishlist') }}" class="header-tools__item header-tools__wishlist site-header__icon-btn" aria-label="Wishlist">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <use href="#icon_heart" />
               </svg>
               <span class="wishlist-amount d-block position-absolute js-wishlist-count">0</span>
             </a>
-  
-            <a href="{{ route('cart') }}" class="header-tools__item header-tools__cart">
+
+            <a href="{{ route('cart') }}" class="header-tools__item header-tools__cart site-header__icon-btn" aria-label="Cart">
               <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <use href="#icon_cart" />
@@ -538,8 +524,63 @@
             </a>
           </div>
         </div>
+
+        <nav class="navigation site-header__nav">
+          <ul class="navigation__list list-unstyled d-flex">
+            <li class="navigation__item">
+              <a href="{{ route('home') }}" class="navigation__link {{ request()->routeIs('home') ? 'is-active' : '' }}">Home</a>
+            </li>
+            <li class="navigation__item">
+              <a href="{{ route('shop') }}" class="navigation__link {{ request()->routeIs('shop') ? 'is-active' : '' }}">Shop</a>
+            </li>
+            <li class="navigation__item">
+              <a href="{{ route('about') }}" class="navigation__link {{ request()->routeIs('about') ? 'is-active' : '' }}">About</a>
+            </li>
+            <li class="navigation__item">
+              <a href="{{ route('contact') }}" class="navigation__link {{ request()->routeIs('contact') ? 'is-active' : '' }}">Contact</a>
+            </li>
+            <li class="navigation__item">
+              <a href="{{ route('wishlist') }}" class="navigation__link {{ request()->routeIs('wishlist') ? 'is-active' : '' }}">Wishlist</a>
+            </li>
+            <li class="navigation__item">
+              <a href="{{ route('cart') }}" class="navigation__link {{ request()->routeIs('cart') ? 'is-active' : '' }}">Cart</a>
+            </li>
+          </ul>
+        </nav>
+       </div>
       </div>
     </header>
+
+    <div class="aside aside_left" id="navDrawer">
+      <div class="aside-header d-flex align-items-center justify-content-between">
+        <a href="{{ route('home') }}" class="logo">
+          <x-logo class="logo__image d-block site-drawer__logo" />
+        </a>
+        <button type="button" class="btn-icon btn-close-lg js-close-aside" aria-label="Close menu"></button>
+      </div>
+      <div class="aside-content">
+        <ul class="site-drawer__list list-unstyled mb-0">
+          <li><a href="{{ route('home') }}" class="site-drawer__link {{ request()->routeIs('home') ? 'is-active' : '' }}">Home</a></li>
+          <li><a href="{{ route('shop') }}" class="site-drawer__link {{ request()->routeIs('shop') ? 'is-active' : '' }}">Shop</a></li>
+          <li><a href="{{ route('about') }}" class="site-drawer__link {{ request()->routeIs('about') ? 'is-active' : '' }}">About</a></li>
+          <li><a href="{{ route('contact') }}" class="site-drawer__link {{ request()->routeIs('contact') ? 'is-active' : '' }}">Contact</a></li>
+          <li><a href="{{ route('wishlist') }}" class="site-drawer__link {{ request()->routeIs('wishlist') ? 'is-active' : '' }}">Wishlist</a></li>
+          <li><a href="{{ route('cart') }}" class="site-drawer__link {{ request()->routeIs('cart') ? 'is-active' : '' }}">Cart</a></li>
+        </ul>
+
+        <div class="site-drawer__footer border-top mt-4 pt-4">
+          <a href="{{ auth()->check() ? route('account') : route('login') }}" class="site-drawer__link d-block">
+            {{ auth()->check() ? Auth::user()->name : 'Login / Register' }}
+          </a>
+          @auth
+            <form method="POST" action="{{ route('logout') }}" class="mt-2">
+              @csrf
+              <button type="submit" class="btn-link default-underline fw-medium text-uppercase p-0">Logout</button>
+            </form>
+          @endauth
+        </div>
+      </div>
+    </div>
     @yield('content')
     <hr class="mt-5 text-secondary" />
     <footer class="footer footer_type_2">
