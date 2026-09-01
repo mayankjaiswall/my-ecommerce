@@ -10,7 +10,7 @@
 
     <link rel="icon" href="{{ asset('assets/images/favicon.svg') }}" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.gstatic.com/">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/css/admin.css') }}">
     @stack('styles')
 </head>
@@ -22,16 +22,10 @@
 
         <aside class="admin-sidebar" id="adminSidebar">
             <div class="admin-sidebar__brand">
-                <span class="admin-sidebar__brand-badge">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 2 4 5.5v6.03c0 5.24 3.4 9.9 8 11.47 4.6-1.57 8-6.23 8-11.47V5.5L12 2Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
-                        <path d="m8.5 12.3 2.4 2.4 4.6-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </span>
-                <span class="admin-sidebar__brand-text">
-                    <strong>{{ config('app.name', 'Laravel') }}</strong>
-                    <span>Admin Panel</span>
-                </span>
+                <a href="{{ route('home') }}" class="admin-sidebar__brand-logo">
+                    <x-logo class="admin-sidebar__brand-logo-img d-block" />
+                </a>
+                <span class="admin-sidebar__brand-tag">Admin Panel</span>
             </div>
 
             <nav class="admin-nav">
