@@ -33,6 +33,8 @@ Route::view('/terms-conditions', 'terms-conditions')->name('terms-conditions');
 
 Route::middleware('auth')->group(function () {
     Route::get('/account', [AccountController::class, 'index'])->name('account');
+    Route::put('/account/avatar', [AccountController::class, 'updateAvatar'])->name('account.avatar.update');
+    Route::delete('/account/avatar', [AccountController::class, 'destroyAvatar'])->name('account.avatar.destroy');
 });
 
 Route::get('/admin', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
@@ -46,4 +48,6 @@ Route::middleware('admin')->group(function () {
     Route::get('/admin/profile', [AdminProfileController::class, 'edit'])->name('admin.profile.edit');
     Route::put('/admin/profile', [AdminProfileController::class, 'update'])->name('admin.profile.update');
     Route::put('/admin/profile/password', [AdminProfileController::class, 'updatePassword'])->name('admin.profile.password');
+    Route::put('/admin/profile/avatar', [AdminProfileController::class, 'updateAvatar'])->name('admin.profile.avatar');
+    Route::delete('/admin/profile/avatar', [AdminProfileController::class, 'destroyAvatar'])->name('admin.profile.avatar.destroy');
 });
