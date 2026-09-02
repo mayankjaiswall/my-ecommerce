@@ -199,6 +199,13 @@ html {
   font-weight: 600;
   font-size: 13.5px;
   flex-shrink: 0;
+  overflow: hidden;
+}
+
+.admin-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .admin-sidebar__user-name {
@@ -691,6 +698,100 @@ html {
 .admin-profile-header__role {
   font-size: 12.5px;
   color: var(--admin-text-muted);
+}
+
+.admin-avatar-uploader {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.admin-avatar--xl {
+  width: 88px;
+  height: 88px;
+  font-size: 30px;
+}
+
+.admin-avatar-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.admin-btn--outline {
+  background: transparent;
+  border-color: var(--admin-border);
+  color: var(--admin-text);
+}
+
+.admin-btn--outline:hover {
+  border-color: var(--admin-text);
+  background: var(--admin-bg);
+}
+
+.admin-btn--sm {
+  padding: 9px 18px;
+  font-size: 11.5px;
+}
+
+.admin-avatar-label {
+  position: relative;
+  overflow: hidden;
+}
+
+.admin-avatar-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.admin-avatar-save-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.admin-avatar-cancel-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--admin-text-muted);
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+
+.admin-avatar-cancel-btn:hover {
+  color: var(--admin-text);
+}
+
+.admin-avatar-remove-form {
+  margin: 0;
+}
+
+.admin-avatar-remove-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--admin-accent);
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+
+.admin-avatar-remove-btn:hover {
+  color: var(--admin-danger);
 }
 
 @media (max-width: 900px) {

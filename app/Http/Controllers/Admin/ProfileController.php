@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
@@ -47,5 +48,36 @@ class ProfileController extends Controller
         ]);
 
         return redirect()->route('admin.profile.edit')->with('status', 'password-updated');
+    }
+
+    public function updateAvatar(Request $request): RedirectResponse
+    {
+        $user = Auth::user();
+
+        $request->validate([
+            'avatar' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+        ]);
+
+        if ($user->avatar) {
+            Storage::disk('public')->delete($user->avatar);
+        }
+
+        $path = $request->file('avatar')->store('avatars', 'public');
+
+        $user->update(['avatar' => $path]);
+
+        return redirect()->route('admin.profile.edit')->with('status', 'avatar-updated');
+    }
+
+    public function destroyAvatar(): RedirectResponse
+    {
+        $user = Auth::user();
+
+        if ($user->avatar) {
+            Storage::disk('public')->delete($user->avatar);
+            $user->update(['avatar' => null]);
+        }
+
+        return redirect()->route('admin.profile.edit')->with('status', 'avatar-removed');
     }
 }

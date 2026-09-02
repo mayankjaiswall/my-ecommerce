@@ -557,6 +557,70 @@
     font-weight: 500;
 }
 
+.account-info-card--photo {
+    padding: 1.5rem 1.75rem;
+}
+
+.account-avatar-uploader {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+}
+
+.account-avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background-color: #1f1f1f;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.account-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.account-avatar-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: .5rem;
+}
+
+.account-avatar-label {
+    position: relative;
+    overflow: hidden;
+}
+
+.account-avatar-input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.account-avatar-save-row {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+}
+
+.account-avatar-hint {
+    color: #767676;
+    font-size: .75rem;
+}
+
 @keyframes accountPanelFade {
     from {
         opacity: 0;
