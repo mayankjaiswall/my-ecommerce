@@ -64,7 +64,13 @@
 
             <div class="admin-sidebar__footer">
                 <a href="{{ route('admin.profile.edit') }}" class="admin-sidebar__user admin-sidebar__user--link">
-                    <span class="admin-avatar">{{ strtoupper(substr($user->name ?? 'A', 0, 1)) }}</span>
+                    <span class="admin-avatar">
+                        @if ($user->avatar_url)
+                            <img src="{{ $user->avatar_url }}" alt="{{ $user->name }}">
+                        @else
+                            {{ strtoupper(substr($user->name ?? 'A', 0, 1)) }}
+                        @endif
+                    </span>
                     <div>
                         <div class="admin-sidebar__user-name">{{ $user->name }}</div>
                         <div class="admin-sidebar__user-role">{{ $user->email }}</div>
@@ -105,7 +111,11 @@
                         <span>Administrator</span>
                     </span>
                     <a href="{{ route('admin.profile.edit') }}" class="admin-avatar admin-avatar--link" title="Edit profile" aria-label="Edit profile">
-                        {{ strtoupper(substr($user->name ?? 'A', 0, 1)) }}
+                        @if ($user->avatar_url)
+                            <img src="{{ $user->avatar_url }}" alt="{{ $user->name }}">
+                        @else
+                            {{ strtoupper(substr($user->name ?? 'A', 0, 1)) }}
+                        @endif
                     </a>
                 </div>
             </header>

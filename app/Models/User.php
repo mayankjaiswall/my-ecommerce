@@ -3,10 +3,12 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -23,6 +25,7 @@ class User extends Authenticatable
         'email',
         'role_id',
         'password',
+        'avatar',
     ];
 
     /**
@@ -53,5 +56,12 @@ class User extends Authenticatable
     public function isAdmin(): bool
     {
         return $this->role_id === 1;
+    }
+
+    protected function avatarUrl(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->avatar ? Storage::disk('public')->url($this->avatar) : null,
+        );
     }
 }
