@@ -38,13 +38,12 @@
                 </a>
 
                 <p class="admin-nav__label">Management</p>
-                <span class="admin-nav-link is-disabled">
+                <a href="{{ route('admin.users.index') }}" class="admin-nav-link {{ request()->routeIs('admin.users.*') ? 'is-active' : '' }}">
                     <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M13.333 17.5v-1.667a3.333 3.333 0 0 0-3.333-3.333H4.167a3.333 3.333 0 0 0-3.334 3.333V17.5M17.5 17.5v-1.667a3.333 3.333 0 0 0-2.5-3.226M11.667 2.559a3.333 3.333 0 0 1 0 6.455M9.167 9.167a3.333 3.333 0 1 0 0-6.667 3.333 3.333 0 0 0 0 6.667Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                     Users
-                    <span class="admin-soon">Soon</span>
-                </span>
+                </a>
                 <span class="admin-nav-link is-disabled">
                     <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M2.5 6.25 10 2.5l7.5 3.75-7.5 3.75-7.5-3.75Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
