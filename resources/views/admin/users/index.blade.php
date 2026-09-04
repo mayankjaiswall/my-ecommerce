@@ -95,13 +95,13 @@
                         <td>{{ $user->created_at->format('M d, Y') }}</td>
                         <td>
                             <div class="admin-table-actions">
-                                <a href="{{ route('admin.users.edit', $user) }}" class="admin-table-action">Edit</a>
+                                <a href="{{ route('admin.users.edit', $user) }}" class="admin-table-btn">Edit</a>
 
                                 @if ($user->id !== auth()->id())
                                     <form method="POST" action="{{ route('admin.users.toggle-status', $user) }}" class="admin-table-action-form">
                                         @csrf
                                         @method('PATCH')
-                                        <button type="submit" class="admin-table-action">
+                                        <button type="submit" class="admin-table-btn">
                                             {{ $user->is_active ? 'Deactivate' : 'Activate' }}
                                         </button>
                                     </form>
@@ -110,7 +110,7 @@
                                         onsubmit="return confirm('Delete {{ $user->name }}? This cannot be undone.');">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="admin-table-action admin-table-action--danger">Delete</button>
+                                        <button type="submit" class="admin-table-btn admin-table-btn--danger">Delete</button>
                                     </form>
                                 @endif
                             </div>
