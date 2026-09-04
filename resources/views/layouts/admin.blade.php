@@ -13,6 +13,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/css/admin.css') }}">
     @stack('styles')
+    <script>
+        (function () {
+            try {
+                if (localStorage.getItem('admin-sidebar-collapsed') === '1') {
+                    document.documentElement.classList.add('admin-sidebar-collapsed');
+                }
+            } catch (e) {}
+        })();
+    </script>
 </head>
 <body class="admin-body">
     @php $user = auth()->user(); @endphp
@@ -26,43 +35,48 @@
                     <x-logo class="admin-sidebar__brand-logo-img d-block" />
                 </a>
                 <span class="admin-sidebar__brand-tag">Admin Panel</span>
+                <button type="button" class="admin-sidebar-collapse-toggle" id="adminSidebarCollapseToggle" aria-label="Collapse sidebar" aria-expanded="true" title="Collapse sidebar">
+                    <svg width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12.5 4.167 7.5 10l5 5.833" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
             </div>
 
             <nav class="admin-nav">
                 <p class="admin-nav__label">Overview</p>
-                <a href="{{ route('admin.dashboard') }}" class="admin-nav-link {{ request()->routeIs('admin.dashboard') ? 'is-active' : '' }}">
+                <a href="{{ route('admin.dashboard') }}" class="admin-nav-link {{ request()->routeIs('admin.dashboard') ? 'is-active' : '' }}" title="Dashboard">
                     <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M2.5 8.333 10 2.5l7.5 5.833V16.5a1 1 0 0 1-1 1h-4.167v-5.417H7.667V17.5H3.5a1 1 0 0 1-1-1V8.333Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
                     </svg>
-                    Dashboard
+                    <span class="admin-nav-link__label">Dashboard</span>
                 </a>
 
                 <p class="admin-nav__label">Management</p>
-                <a href="{{ route('admin.users.index') }}" class="admin-nav-link {{ request()->routeIs('admin.users.*') ? 'is-active' : '' }}">
+                <a href="{{ route('admin.users.index') }}" class="admin-nav-link {{ request()->routeIs('admin.users.*') ? 'is-active' : '' }}" title="Users">
                     <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M13.333 17.5v-1.667a3.333 3.333 0 0 0-3.333-3.333H4.167a3.333 3.333 0 0 0-3.334 3.333V17.5M17.5 17.5v-1.667a3.333 3.333 0 0 0-2.5-3.226M11.667 2.559a3.333 3.333 0 0 1 0 6.455M9.167 9.167a3.333 3.333 0 1 0 0-6.667 3.333 3.333 0 0 0 0 6.667Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    Users
+                    <span class="admin-nav-link__label">Users</span>
                 </a>
-                <span class="admin-nav-link is-disabled">
+                <span class="admin-nav-link is-disabled" title="Products">
                     <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M2.5 6.25 10 2.5l7.5 3.75-7.5 3.75-7.5-3.75Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
                         <path d="M2.5 6.25V13.75L10 17.5l7.5-3.75V6.25M10 10v7.5" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
                     </svg>
-                    Products
+                    <span class="admin-nav-link__label">Products</span>
                     <span class="admin-soon">Soon</span>
                 </span>
-                <span class="admin-nav-link is-disabled">
+                <span class="admin-nav-link is-disabled" title="Orders">
                     <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M2.5 5h15M5 5V3.333A1.667 1.667 0 0 1 6.667 1.667h6.666A1.667 1.667 0 0 1 15 3.333V5m2.5 0-.833 11.25A1.667 1.667 0 0 1 15 17.917H5a1.667 1.667 0 0 1-1.667-1.667L2.5 5h15Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
                     </svg>
-                    Orders
+                    <span class="admin-nav-link__label">Orders</span>
                     <span class="admin-soon">Soon</span>
                 </span>
             </nav>
 
             <div class="admin-sidebar__footer">
-                <a href="{{ route('admin.profile.edit') }}" class="admin-sidebar__user admin-sidebar__user--link">
+                <a href="{{ route('admin.profile.edit') }}" class="admin-sidebar__user admin-sidebar__user--link" title="{{ $user->name }}">
                     <span class="admin-avatar">
                         @if ($user->avatar_url)
                             <img src="{{ $user->avatar_url }}" alt="{{ $user->name }}">
@@ -70,7 +84,7 @@
                             {{ strtoupper(substr($user->name ?? 'A', 0, 1)) }}
                         @endif
                     </span>
-                    <div>
+                    <div class="admin-sidebar__user-info">
                         <div class="admin-sidebar__user-name">{{ $user->name }}</div>
                         <div class="admin-sidebar__user-role">{{ $user->email }}</div>
                     </div>
@@ -78,11 +92,11 @@
 
                 <form method="POST" action="{{ route('admin.logout') }}">
                     @csrf
-                    <button type="submit" class="admin-logout-btn">
+                    <button type="submit" class="admin-logout-btn" title="Sign Out">
                         <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M7.5 17.5h-3.333a1.667 1.667 0 0 1-1.667-1.667V4.167A1.667 1.667 0 0 1 4.167 2.5H7.5M13.333 14.167 17.5 10l-4.167-4.167M17.5 10H7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Sign Out
+                        <span class="admin-logout-btn__label">Sign Out</span>
                     </button>
                 </form>
             </div>
@@ -142,6 +156,22 @@
             });
 
             overlay.addEventListener('click', closeSidebar);
+        })();
+
+        (function () {
+            var collapseToggle = document.getElementById('adminSidebarCollapseToggle');
+            var STORAGE_KEY = 'admin-sidebar-collapsed';
+
+            function setCollapsed(collapsed) {
+                document.documentElement.classList.toggle('admin-sidebar-collapsed', collapsed);
+                collapseToggle.setAttribute('aria-expanded', String(!collapsed));
+                collapseToggle.title = collapsed ? 'Expand sidebar' : 'Collapse sidebar';
+                try { localStorage.setItem(STORAGE_KEY, collapsed ? '1' : '0'); } catch (e) {}
+            }
+
+            collapseToggle.addEventListener('click', function () {
+                setCollapsed(!document.documentElement.classList.contains('admin-sidebar-collapsed'));
+            });
         })();
     </script>
 
