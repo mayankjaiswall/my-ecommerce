@@ -64,7 +64,9 @@
                     <p class="admin-panel__subtitle">New registrations over the last 6 months</p>
                 </div>
             </div>
-            <canvas id="growthChart" height="110"></canvas>
+            <div class="admin-chart-wrap">
+                <canvas id="growthChart"></canvas>
+            </div>
         </div>
 
         <div class="admin-panel">
@@ -74,7 +76,9 @@
                     <p class="admin-panel__subtitle">Accounts by assigned role</p>
                 </div>
             </div>
-            <canvas id="roleChart" height="180"></canvas>
+            <div class="admin-chart-wrap admin-chart-wrap--donut">
+                <canvas id="roleChart"></canvas>
+            </div>
             <div class="admin-legend">
                 @foreach ($roleBreakdown as $index => $role)
                     <div class="admin-legend__item">
@@ -154,6 +158,7 @@
             },
             options: {
                 responsive: true,
+                maintainAspectRatio: false,
                 plugins: { legend: { display: false } },
                 scales: {
                     y: { beginAtZero: true, ticks: { precision: 0 }, grid: { color: '#ece7df' } },
@@ -175,6 +180,7 @@
             },
             options: {
                 responsive: true,
+                maintainAspectRatio: false,
                 cutout: '72%',
                 plugins: { legend: { display: false } }
             }
