@@ -14,34 +14,11 @@ use Illuminate\View\View;
 
 class UserController extends Controller
 {
-    public function index(Request $request): View
+    public function index(): View
     {
-        $search = trim((string) $request->query('search'));
-        $role = $request->query('role');
-        $status = $request->query('status');
-
-        $users = User::with('role')
-            ->when($search !== '', function ($query) use ($search) {
-                $query->where(function ($q) use ($search) {
-                    $q->where('name', 'like', "%{$search}%")
-                        ->orWhere('email', 'like', "%{$search}%");
-                });
-            })
-            ->when($role, fn ($query) => $query->where('role_id', $role))
-            ->when($status === 'active', fn ($query) => $query->where('is_active', true))
-            ->when($status === 'inactive', fn ($query) => $query->where('is_active', false))
-            ->latest()
-            ->paginate(10)
-            ->withQueryString();
-
         return view('admin.users.index', [
-            'users' => $users,
+            'users' => User::with('role')->latest()->get(),
             'roles' => Role::orderBy('name')->get(),
-            'filters' => [
-                'search' => $search,
-                'role' => $role,
-                'status' => $status,
-            ],
         ]);
     }
 

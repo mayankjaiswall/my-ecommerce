@@ -20,48 +20,37 @@
     @endif
 
     <div class="admin-toolbar">
-        <form method="GET" action="{{ route('admin.users.index') }}">
-            <input type="text" name="search" class="admin-search-input" placeholder="Search by name or email"
-                value="{{ $filters['search'] ?? '' }}">
+        <select id="usersRoleFilter" class="admin-filter-select">
+            <option value="">All Roles</option>
+            @foreach ($roles as $role)
+                <option value="{{ $role->name }}">{{ \Illuminate\Support\Str::title(str_replace('_', ' ', $role->name)) }}</option>
+            @endforeach
+        </select>
 
-            <select name="role" class="admin-filter-select" onchange="this.form.submit()">
-                <option value="">All Roles</option>
-                @foreach ($roles as $role)
-                    <option value="{{ $role->id }}" {{ (string) ($filters['role'] ?? '') === (string) $role->id ? 'selected' : '' }}>
-                        {{ \Illuminate\Support\Str::title(str_replace('_', ' ', $role->name)) }}
-                    </option>
-                @endforeach
-            </select>
+        <select id="usersStatusFilter" class="admin-filter-select">
+            <option value="">All Statuses</option>
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+        </select>
 
-            <select name="status" class="admin-filter-select" onchange="this.form.submit()">
-                <option value="">All Statuses</option>
-                <option value="active" {{ ($filters['status'] ?? '') === 'active' ? 'selected' : '' }}>Active</option>
-                <option value="inactive" {{ ($filters['status'] ?? '') === 'inactive' ? 'selected' : '' }}>Inactive</option>
-            </select>
-
-            <button type="submit" class="admin-btn admin-btn--outline admin-btn--sm">Filter</button>
-
-            @if (($filters['search'] ?? '') || ($filters['role'] ?? '') || ($filters['status'] ?? ''))
-                <a href="{{ route('admin.users.index') }}" class="admin-table-action">Clear</a>
-            @endif
-        </form>
+        <button type="button" id="usersClearFilters" class="admin-table-action">Clear</button>
     </div>
 
     <div class="admin-table-wrap">
-        <table>
+        <table id="usersTable" class="admin-datatable" style="width: 100%;">
             <thead>
                 <tr>
                     <th>User</th>
                     <th>Role</th>
                     <th>Status</th>
                     <th>Joined</th>
-                    <th>Actions</th>
+                    <th class="admin-dt-no-sort">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse ($users as $user)
-                    <tr>
-                        <td>
+                @foreach ($users as $user)
+                    <tr data-role="{{ $user->role->name ?? '' }}" data-status="{{ $user->is_active ? 'active' : 'inactive' }}">
+                        <td data-order="{{ $user->name }}">
                             <div class="admin-table-user">
                                 <span class="admin-avatar">
                                     @if ($user->avatar_url)
@@ -76,7 +65,7 @@
                                 </div>
                             </div>
                         </td>
-                        <td>
+                        <td data-order="{{ $user->isAdmin() ? 'admin' : ($user->role->name ?? '') }}">
                             @if ($user->isAdmin())
                                 <span class="admin-badge admin-badge--admin">Admin</span>
                             @else
@@ -85,14 +74,14 @@
                                 </span>
                             @endif
                         </td>
-                        <td>
+                        <td data-order="{{ $user->is_active ? 1 : 0 }}">
                             @if ($user->is_active)
                                 <span class="admin-badge admin-badge--active">Active</span>
                             @else
                                 <span class="admin-badge admin-badge--inactive">Inactive</span>
                             @endif
                         </td>
-                        <td>{{ $user->created_at->format('M d, Y') }}</td>
+                        <td data-order="{{ $user->created_at->timestamp }}">{{ $user->created_at->format('M d, Y') }}</td>
                         <td>
                             <div class="admin-table-actions">
                                 <a href="{{ route('admin.users.edit', $user) }}" class="admin-table-btn">Edit</a>
@@ -116,15 +105,81 @@
                             </div>
                         </td>
                     </tr>
-                @empty
-                    <tr>
-                        <td colspan="5">No users found.</td>
-                    </tr>
-                @endforelse
+                @endforeach
             </tbody>
         </table>
     </div>
 
-    {{ $users->links('vendor.pagination.admin') }}
-
 @endsection
+
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('assets/css/admin-datatable.css') }}">
+@endpush
+
+@push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/datatables.net@2.1.8/js/dataTables.min.js"></script>
+    <script>
+        (function () {
+            var table = new DataTable('#usersTable', {
+                order: [[3, 'desc']],
+                pageLength: 10,
+                dom: '<"admin-dt-controls"lf>rt<"admin-dt-footer"ip>',
+                columnDefs: [
+                    { targets: -1, orderable: false, searchable: false },
+                ],
+                language: {
+                    search: '',
+                    searchPlaceholder: 'Search by name or email',
+                    lengthMenu: 'Show _MENU_ users',
+                    emptyTable: 'No users found.',
+                    zeroRecords: 'No matching users found.',
+                    info: 'Showing _START_ to _END_ of _TOTAL_ users',
+                    infoEmpty: 'Showing 0 users',
+                    infoFiltered: '(filtered from _MAX_ total)',
+                    paginate: { previous: '‹', next: '›' },
+                },
+            });
+
+            DataTable.ext.search.push(function (settings, searchData, index, rowData, counter) {
+                if (settings.nTable.id !== 'usersTable') {
+                    return true;
+                }
+
+                var row = table.row(index).node();
+                var role = document.getElementById('usersRoleFilter').value;
+                var status = document.getElementById('usersStatusFilter').value;
+
+                if (role && row.getAttribute('data-role') !== role) {
+                    return false;
+                }
+
+                if (status && row.getAttribute('data-status') !== status) {
+                    return false;
+                }
+
+                return true;
+            });
+
+            document.getElementById('usersRoleFilter').addEventListener('change', function () {
+                table.draw();
+            });
+
+            document.getElementById('usersStatusFilter').addEventListener('change', function () {
+                table.draw();
+            });
+
+            document.getElementById('usersClearFilters').addEventListener('click', function () {
+                document.getElementById('usersRoleFilter').value = '';
+                document.getElementById('usersStatusFilter').value = '';
+
+                var searchInput = document.querySelector('#usersTable_wrapper .dt-search input');
+                if (searchInput) {
+                    searchInput.value = '';
+                }
+
+                table.search('').draw();
+            });
+        })();
+    </script>
+@endpush

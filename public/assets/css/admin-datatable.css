@@ -1,0 +1,191 @@
+/* DataTables theming — matches the admin design system in admin.css */
+
+.admin-table-wrap .dt-container {
+  padding: 0;
+}
+
+.admin-dt-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 22px;
+  border-bottom: 1px solid var(--admin-border);
+  flex-wrap: wrap;
+}
+
+.admin-dt-controls .dt-length,
+.admin-dt-controls .dt-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--admin-text-muted);
+}
+
+.admin-dt-controls .dt-length label,
+.admin-dt-controls .dt-search label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+}
+
+.admin-dt-controls .dt-length select,
+.admin-dt-controls .dt-search input {
+  padding: 10px 14px;
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius-sm);
+  font-family: var(--admin-font);
+  font-size: 13px;
+  color: var(--admin-text);
+  background: var(--admin-surface);
+}
+
+.admin-dt-controls .dt-search input {
+  min-width: 220px;
+}
+
+.admin-dt-controls .dt-length select:focus,
+.admin-dt-controls .dt-search input:focus {
+  outline: none;
+  border-color: var(--admin-text);
+  box-shadow: 0 0 0 3px var(--admin-primary-light);
+}
+
+table.admin-datatable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table.admin-datatable th {
+  text-align: left;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--admin-text-muted);
+  font-weight: 500;
+  padding: 14px 22px;
+  border-bottom: 1px solid var(--admin-border);
+}
+
+table.admin-datatable td {
+  padding: 14px 22px;
+  font-size: 13.5px;
+  color: var(--admin-text);
+  border-bottom: 1px solid var(--admin-border);
+}
+
+table.admin-datatable tbody tr:last-child td {
+  border-bottom: none;
+}
+
+table.admin-datatable tbody tr {
+  transition: background-color 0.15s ease;
+}
+
+table.admin-datatable tbody tr:hover {
+  background-color: var(--admin-bg);
+}
+
+table.admin-datatable thead th.dt-orderable-asc,
+table.admin-datatable thead th.dt-orderable-desc {
+  cursor: pointer;
+  position: relative;
+  padding-right: 26px;
+}
+
+table.admin-datatable thead th.dt-orderable-asc .dt-column-order,
+table.admin-datatable thead th.dt-orderable-desc .dt-column-order {
+  position: absolute;
+  right: 22px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 12px;
+}
+
+table.admin-datatable thead th.dt-orderable-asc .dt-column-order::before,
+table.admin-datatable thead th.dt-orderable-asc .dt-column-order::after,
+table.admin-datatable thead th.dt-orderable-desc .dt-column-order::before,
+table.admin-datatable thead th.dt-orderable-desc .dt-column-order::after {
+  content: '';
+  position: absolute;
+  left: 2px;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  opacity: 0.35;
+}
+
+table.admin-datatable thead th .dt-column-order::before {
+  top: 0;
+  border-bottom: 5px solid var(--admin-text-muted);
+}
+
+table.admin-datatable thead th .dt-column-order::after {
+  bottom: 0;
+  border-top: 5px solid var(--admin-text-muted);
+}
+
+table.admin-datatable thead th.dt-ordering-asc .dt-column-order::before {
+  opacity: 1;
+  border-bottom-color: var(--admin-text);
+}
+
+table.admin-datatable thead th.dt-ordering-desc .dt-column-order::after {
+  opacity: 1;
+  border-top-color: var(--admin-text);
+}
+
+.admin-dt-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 22px;
+  border-top: 1px solid var(--admin-border);
+  flex-wrap: wrap;
+}
+
+.admin-dt-footer .dt-info {
+  font-size: 12.5px;
+  color: var(--admin-text-muted);
+}
+
+.admin-dt-footer .dt-paging nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.admin-dt-footer .dt-paging-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  height: 34px;
+  padding: 0 8px;
+  border-radius: var(--admin-radius-sm);
+  border: 1px solid var(--admin-border);
+  color: var(--admin-text);
+  font-size: 12.5px;
+  font-family: var(--admin-font);
+  cursor: pointer;
+  background: var(--admin-surface);
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.admin-dt-footer .dt-paging-button:hover:not(.disabled):not(.current) {
+  background: var(--admin-bg);
+}
+
+.admin-dt-footer .dt-paging-button.current {
+  background: var(--admin-primary);
+  border-color: var(--admin-primary);
+  color: #fff;
+}
+
+.admin-dt-footer .dt-paging-button.disabled {
+  opacity: 0.4;
+  cursor: default;
+}
