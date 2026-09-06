@@ -652,6 +652,16 @@ html {
   color: var(--admin-text-muted);
 }
 
+.admin-table-category__name {
+  font-weight: 600;
+  color: var(--admin-text);
+}
+
+.admin-table-category__slug {
+  font-size: 12px;
+  color: var(--admin-text-muted);
+}
+
 .admin-badge {
   display: inline-flex;
   align-items: center;
@@ -919,6 +929,21 @@ html {
 }
 
 .admin-toolbar form {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.admin-toolbar--split {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.admin-toolbar__filters {
   display: flex;
   align-items: center;
   gap: 12px;

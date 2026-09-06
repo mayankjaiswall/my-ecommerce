@@ -58,6 +58,13 @@
                     </svg>
                     <span class="admin-nav-link__label">Users</span>
                 </a>
+                <a href="{{ route('admin.categories.index') }}" class="admin-nav-link {{ request()->routeIs('admin.categories.*') ? 'is-active' : '' }}" title="Categories">
+                    <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17.5 10.833 10.833 17.5a1.667 1.667 0 0 1-2.357 0L2.5 11.524V2.5h9.024l5.976 5.976a1.667 1.667 0 0 1 0 2.357Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                        <path d="M6.667 6.667h.008" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <span class="admin-nav-link__label">Categories</span>
+                </a>
                 <span class="admin-nav-link is-disabled" title="Products">
                     <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M2.5 6.25 10 2.5l7.5 3.75-7.5 3.75-7.5-3.75Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
