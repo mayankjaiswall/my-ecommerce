@@ -22,7 +22,7 @@
         </div>
     </div>
 
-    <div class="admin-panel admin-panel--narrow">
+    <div class="admin-panel">
         <div class="admin-panel__header">
             <div>
                 <h3 class="admin-panel__title">Category Details</h3>
@@ -34,28 +34,30 @@
             @csrf
             @method('PUT')
 
-            <div class="admin-form-row">
-                <label for="category_name" class="admin-form-label">Category Name</label>
-                <input type="text" id="category_name" name="category_name" class="admin-form-input @error('category_name') is-invalid @enderror"
-                    value="{{ old('category_name', $category->category_name) }}" required autocomplete="off">
-                @error('category_name')
-                    <span class="admin-form-error">{{ $message }}</span>
-                @enderror
-            </div>
+            <div class="admin-form-grid">
+                <div class="admin-form-row">
+                    <label for="category_name" class="admin-form-label">Category Name</label>
+                    <input type="text" id="category_name" name="category_name" class="admin-form-input @error('category_name') is-invalid @enderror"
+                        value="{{ old('category_name', $category->category_name) }}" required autocomplete="off">
+                    @error('category_name')
+                        <span class="admin-form-error">{{ $message }}</span>
+                    @enderror
+                </div>
 
-            <div class="admin-form-row">
-                <label for="slug" class="admin-form-label">Slug</label>
-                <input type="text" id="slug" name="slug" class="admin-form-input @error('slug') is-invalid @enderror"
-                    value="{{ old('slug', $category->slug) }}" autocomplete="off">
-                <span class="admin-form-hint">Used in the category URL. Leave as-is or edit manually.</span>
-                @error('slug')
-                    <span class="admin-form-error">{{ $message }}</span>
-                @enderror
+                <div class="admin-form-row">
+                    <label for="slug" class="admin-form-label">Slug</label>
+                    <input type="text" id="slug" name="slug" class="admin-form-input @error('slug') is-invalid @enderror"
+                        value="{{ old('slug', $category->slug) }}" autocomplete="off">
+                    <span class="admin-form-hint">Used in the category URL. Leave as-is or edit manually.</span>
+                    @error('slug')
+                        <span class="admin-form-error">{{ $message }}</span>
+                    @enderror
+                </div>
             </div>
 
             <div class="admin-form-row">
                 <label for="description" class="admin-form-label">Description</label>
-                <textarea id="description" name="description" rows="4" class="admin-form-input @error('description') is-invalid @enderror"
+                <textarea id="description" name="description" rows="8" class="admin-form-input @error('description') is-invalid @enderror"
                     placeholder="Optional short description shown on the storefront">{{ old('description', $category->description) }}</textarea>
                 @error('description')
                     <span class="admin-form-error">{{ $message }}</span>
@@ -69,7 +71,7 @@
         </form>
     </div>
 
-    <div class="admin-panel admin-panel--narrow" style="margin-top: 20px;">
+    <div class="admin-panel" style="margin-top: 20px;">
         <div class="admin-panel__header">
             <div>
                 <h3 class="admin-panel__title">Category Status</h3>
