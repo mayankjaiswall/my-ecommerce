@@ -9,13 +9,19 @@
   --admin-primary: #1f1f1f;
   --admin-primary-dark: #000000;
   --admin-primary-light: #f3f1ec;
+  --admin-primary-contrast: #ffffff;
   --admin-accent: #c32929;
   --admin-accent-light: #fbeaea;
   --admin-gold: #b9a16b;
   --admin-gold-light: #f7f2e7;
   --admin-danger: #c32929;
+  --admin-danger-border: #f0d3d3;
   --admin-warning: #b5670a;
   --admin-warning-light: #fff1e0;
+  --admin-success: #4d7c22;
+  --admin-success-light: #f2f7ee;
+  --admin-success-border: #dbe8cc;
+  --admin-user-badge-text: #8a723f;
   --admin-sidebar-bg: #ffffff;
   --admin-sidebar-text: #6b675f;
   --admin-sidebar-text-active: #1f1f1f;
@@ -24,6 +30,34 @@
   --admin-shadow: none;
   --admin-shadow-lg: 0 16px 32px -18px rgba(31, 31, 31, 0.18);
   --admin-font: 'Jost', 'Rajdhani', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+html.admin-theme-dark {
+  --admin-bg: #121212;
+  --admin-surface: #1a1a1a;
+  --admin-border: #2e2e2c;
+  --admin-text: #f0eee9;
+  --admin-text-muted: #9a968c;
+  --admin-primary: #f0eee9;
+  --admin-primary-dark: #d8d4c9;
+  --admin-primary-light: #29281f;
+  --admin-primary-contrast: #14140f;
+  --admin-accent: #e0605a;
+  --admin-accent-light: #3a1f1f;
+  --admin-gold: #cdb583;
+  --admin-gold-light: #2e2a1e;
+  --admin-danger: #e0605a;
+  --admin-danger-border: #4a2727;
+  --admin-warning: #e2934c;
+  --admin-warning-light: #3a2a12;
+  --admin-success: #8bc257;
+  --admin-success-light: #223018;
+  --admin-success-border: #35461f;
+  --admin-user-badge-text: #d8c493;
+  --admin-sidebar-bg: #171717;
+  --admin-sidebar-text: #a29d92;
+  --admin-sidebar-text-active: #f0eee9;
+  --admin-shadow-lg: 0 16px 32px -18px rgba(0, 0, 0, 0.6);
 }
 
 html {
@@ -35,10 +69,20 @@ html {
   font-family: var(--admin-font);
   background: var(--admin-bg);
   color: var(--admin-text);
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .admin-body * {
   box-sizing: border-box;
+}
+
+.admin-sidebar,
+.admin-topbar,
+.admin-panel,
+.admin-stat-card,
+.admin-table-wrap,
+.admin-form-input {
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
 /* ---------------- Dashboard shell ---------------- */
@@ -83,7 +127,7 @@ html {
   flex-shrink: 0;
   border-radius: 50%;
   border: 1px solid var(--admin-border);
-  background: #fff;
+  background: var(--admin-surface);
   color: var(--admin-text-muted);
   display: flex;
   align-items: center;
@@ -224,7 +268,7 @@ html {
   height: 36px;
   border-radius: 50%;
   background-color: var(--admin-primary);
-  color: #fff;
+  color: var(--admin-primary-contrast);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -402,7 +446,7 @@ html {
 .admin-sidebar-toggle {
   display: none;
   border: 1px solid var(--admin-border);
-  background: #fff;
+  background: var(--admin-surface);
   border-radius: var(--admin-radius-sm);
   width: 38px;
   height: 38px;
@@ -429,6 +473,39 @@ html {
   display: flex;
   align-items: center;
   gap: 14px;
+}
+
+.admin-theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--admin-border);
+  background: var(--admin-surface);
+  color: var(--admin-text-muted);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.admin-theme-toggle:hover {
+  color: var(--admin-text);
+  border-color: var(--admin-text);
+  background: var(--admin-bg);
+}
+
+.admin-theme-toggle__icon--sun {
+  display: none;
+}
+
+html.admin-theme-dark .admin-theme-toggle__icon--moon {
+  display: none;
+}
+
+html.admin-theme-dark .admin-theme-toggle__icon--sun {
+  display: block;
 }
 
 .admin-topbar__pill {
@@ -681,7 +758,7 @@ html {
 
 .admin-badge--user {
   background: var(--admin-gold-light);
-  color: #8a723f;
+  color: var(--admin-user-badge-text);
 }
 
 /* Profile page */
@@ -772,7 +849,7 @@ html {
 .admin-btn--primary {
   background: var(--admin-primary);
   border-color: var(--admin-primary);
-  color: #fff;
+  color: var(--admin-primary-contrast);
 }
 
 .admin-btn--primary:hover {
@@ -793,9 +870,9 @@ html {
 }
 
 .admin-alert--success {
-  background: #f2f7ee;
-  color: #4d7c22;
-  border-color: #dbe8cc;
+  background: var(--admin-success-light);
+  color: var(--admin-success);
+  border-color: var(--admin-success-border);
 }
 
 .admin-alert--danger {
@@ -974,8 +1051,8 @@ html {
 }
 
 .admin-badge--active {
-  background: #f2f7ee;
-  color: #4d7c22;
+  background: var(--admin-success-light);
+  color: var(--admin-success);
 }
 
 .admin-badge--inactive {
@@ -997,7 +1074,7 @@ html {
   padding: 6px 14px;
   border-radius: 999px;
   border: 1px solid var(--admin-border);
-  background: #fff;
+  background: var(--admin-surface);
   color: var(--admin-text-muted);
   font-size: 11px;
   font-weight: 500;
@@ -1017,7 +1094,7 @@ html {
 
 .admin-table-btn--danger {
   color: var(--admin-accent);
-  border-color: #f0d3d3;
+  border-color: var(--admin-danger-border);
 }
 
 .admin-table-btn--danger:hover {
@@ -1089,7 +1166,7 @@ html {
 .admin-pagination__btn.is-active {
   background: var(--admin-primary);
   border-color: var(--admin-primary);
-  color: #fff;
+  color: var(--admin-primary-contrast);
 }
 
 .admin-pagination__btn.is-disabled {
