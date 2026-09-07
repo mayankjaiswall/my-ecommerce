@@ -21,6 +21,16 @@
                 }
             } catch (e) {}
         })();
+
+        (function () {
+            try {
+                var stored = localStorage.getItem('admin-theme');
+                var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                if (stored === 'dark' || (!stored && prefersDark)) {
+                    document.documentElement.classList.add('admin-theme-dark');
+                }
+            } catch (e) {}
+        })();
     </script>
 </head>
 <body class="admin-body">
@@ -124,6 +134,15 @@
                 </div>
 
                 <div class="admin-topbar__right">
+                    <button type="button" class="admin-theme-toggle" id="adminThemeToggle" aria-label="Toggle dark theme" aria-pressed="false" title="Switch to dark theme">
+                        <svg class="admin-theme-toggle__icon admin-theme-toggle__icon--moon" width="17" height="17" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17.5 10.708A7.5 7.5 0 1 1 9.292 2.5a6.083 6.083 0 0 0 8.208 8.208Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                        </svg>
+                        <svg class="admin-theme-toggle__icon admin-theme-toggle__icon--sun" width="17" height="17" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="10" cy="10" r="3.333" stroke="currentColor" stroke-width="1.5"/>
+                            <path d="M10 2.5v1.667M10 15.833V17.5M17.5 10h-1.667M4.167 10H2.5M15.303 4.697l-1.178 1.178M5.875 14.125l-1.178 1.178M15.303 15.303l-1.178-1.178M5.875 5.875 4.697 4.697" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                    </button>
                     <span class="admin-topbar__pill">
                         <svg width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M10 1.667 3.75 4.167v4.958c0 3.158 2.667 6.117 6.25 7.208 3.583-1.091 6.25-4.05 6.25-7.208V4.167L10 1.667Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
@@ -179,6 +198,25 @@
             collapseToggle.addEventListener('click', function () {
                 setCollapsed(!document.documentElement.classList.contains('admin-sidebar-collapsed'));
             });
+        })();
+
+        (function () {
+            var themeToggle = document.getElementById('adminThemeToggle');
+            var STORAGE_KEY = 'admin-theme';
+
+            function setTheme(theme) {
+                document.documentElement.classList.toggle('admin-theme-dark', theme === 'dark');
+                themeToggle.setAttribute('aria-pressed', String(theme === 'dark'));
+                themeToggle.title = theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme';
+                try { localStorage.setItem(STORAGE_KEY, theme); } catch (e) {}
+            }
+
+            themeToggle.addEventListener('click', function () {
+                var isDark = document.documentElement.classList.contains('admin-theme-dark');
+                setTheme(isDark ? 'light' : 'dark');
+            });
+
+            setTheme(document.documentElement.classList.contains('admin-theme-dark') ? 'dark' : 'light');
         })();
     </script>
 
