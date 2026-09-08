@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-class Category extends Model
+class Tag extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'category_name',
+        'category_id',
+        'name',
         'slug',
-        'description',
         'is_active',
     ];
 
@@ -21,9 +21,9 @@ class Category extends Model
         'is_active' => 'boolean',
     ];
 
-    public function tags()
+    public function category()
     {
-        return $this->hasMany(Tag::class);
+        return $this->belongsTo(Category::class);
     }
 
     public static function uniqueSlug(string $name, ?int $ignoreId = null): string
