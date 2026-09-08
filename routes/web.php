@@ -5,9 +5,11 @@ use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
+use App\Http\Controllers\Admin\TagController as AdminTagController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -24,7 +26,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::view('/shop', 'shop')->name('shop');
+Route::get('/shop', [ShopController::class, 'index'])->name('shop');
 Route::view('/cart', 'cart')->name('cart');
 Route::view('/wishlist', 'wishlist')->name('wishlist');
 Route::view('/about', 'about')->name('about');
@@ -66,4 +68,12 @@ Route::middleware('admin')->group(function () {
     Route::put('/admin/categories/{category}', [AdminCategoryController::class, 'update'])->name('admin.categories.update');
     Route::patch('/admin/categories/{category}/toggle-status', [AdminCategoryController::class, 'toggleStatus'])->name('admin.categories.toggle-status');
     Route::delete('/admin/categories/{category}', [AdminCategoryController::class, 'destroy'])->name('admin.categories.destroy');
+
+    Route::get('/admin/tags', [AdminTagController::class, 'index'])->name('admin.tags.index');
+    Route::get('/admin/tags/create', [AdminTagController::class, 'create'])->name('admin.tags.create');
+    Route::post('/admin/tags', [AdminTagController::class, 'store'])->name('admin.tags.store');
+    Route::get('/admin/tags/{tag}/edit', [AdminTagController::class, 'edit'])->name('admin.tags.edit');
+    Route::put('/admin/tags/{tag}', [AdminTagController::class, 'update'])->name('admin.tags.update');
+    Route::patch('/admin/tags/{tag}/toggle-status', [AdminTagController::class, 'toggleStatus'])->name('admin.tags.toggle-status');
+    Route::delete('/admin/tags/{tag}', [AdminTagController::class, 'destroy'])->name('admin.tags.destroy');
 });

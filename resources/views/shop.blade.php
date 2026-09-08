@@ -10,6 +10,29 @@
       <section class="products-grid container">
         <h2 class="section-title text-center mb-3 pb-xl-3 mb-xl-4">Shop All</h2>
 
+        @if ($categories->isNotEmpty())
+          <div class="shop-filter-bar" id="shopFilterBar">
+            <div class="shop-filter-bar__tabs" id="shopCategoryTabs">
+              <button type="button" class="shop-filter-tab" data-category="all">All</button>
+              @foreach ($categories as $category)
+                <button type="button" class="shop-filter-tab" data-category="{{ $category->slug }}">
+                  {{ $category->category_name }}
+                </button>
+              @endforeach
+            </div>
+
+            <div class="shop-filter-bar__tags" id="shopTagRow">
+              @foreach ($categories as $category)
+                @foreach ($category->tags as $tag)
+                  <button type="button" class="shop-filter-chip" data-category="{{ $category->slug }}" data-tag="{{ $tag->slug }}">
+                    {{ $tag->name }}
+                  </button>
+                @endforeach
+              @endforeach
+            </div>
+          </div>
+        @endif
+
         <div class="row">
           @foreach ([
             ['img' => 'product-4.jpg', 'name' => 'Cropped Faux Leather Jacket', 'price' => '$29'],
@@ -51,4 +74,53 @@
       <div class="mb-3 mb-xl-5 pt-1 pb-4"></div>
     </div>
   </main>
+
+  @if ($categories->isNotEmpty())
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var tabs = document.getElementById('shopCategoryTabs');
+        var tagRow = document.getElementById('shopTagRow');
+
+        if (!tabs || !tagRow) {
+          return;
+        }
+
+        var tabButtons = tabs.querySelectorAll('.shop-filter-tab');
+        var chips = tagRow.querySelectorAll('.shop-filter-chip');
+
+        function setActiveCategory(category) {
+          tabButtons.forEach(function (btn) {
+            btn.classList.toggle('is-active', btn.dataset.category === category);
+          });
+
+          var hasVisibleChip = false;
+
+          chips.forEach(function (chip) {
+            var matches = category !== 'all' && chip.dataset.category === category;
+            chip.classList.toggle('d-none', !matches);
+            if (matches) {
+              hasVisibleChip = true;
+            }
+          });
+
+          tagRow.classList.toggle('d-none', !hasVisibleChip);
+        }
+
+        tabButtons.forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            setActiveCategory(btn.dataset.category);
+          });
+        });
+
+        chips.forEach(function (chip) {
+          chip.addEventListener('click', function () {
+            chip.classList.toggle('is-active');
+          });
+        });
+
+        var firstCategoryTab = tabs.querySelector('.shop-filter-tab:not([data-category="all"])');
+        setActiveCategory(firstCategoryTab ? firstCategoryTab.dataset.category : 'all');
+      });
+    </script>
+  @endif
 @endsection
