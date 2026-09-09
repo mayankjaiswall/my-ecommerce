@@ -75,6 +75,15 @@
                     </svg>
                     <span class="admin-nav-link__label">Categories</span>
                 </a>
+                <a href="{{ route('admin.tags.index') }}" class="admin-nav-link {{ request()->routeIs('admin.tags.*') ? 'is-active' : '' }}" title="Tags">
+                    <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3.333 5h2.5M9.167 5h7.5M3.333 10h6.667M13.333 10h3.334M3.333 15h2.5M9.167 15h7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        <circle cx="7.5" cy="5" r="1.667" fill="currentColor"/>
+                        <circle cx="11.667" cy="10" r="1.667" fill="currentColor"/>
+                        <circle cx="7.5" cy="15" r="1.667" fill="currentColor"/>
+                    </svg>
+                    <span class="admin-nav-link__label">Tags</span>
+                </a>
                 <span class="admin-nav-link is-disabled" title="Products">
                     <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M2.5 6.25 10 2.5l7.5 3.75-7.5 3.75-7.5-3.75Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
