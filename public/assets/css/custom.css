@@ -857,3 +857,110 @@
     color: #c32929;
     padding-left: .375rem;
 }
+
+/* ---------------- Shop Filter Bar (Category Tabs + Tag Chips) ---------------- */
+.shop-filter-bar {
+    margin-bottom: 2rem;
+}
+
+.shop-filter-bar__tabs {
+    display: flex;
+    gap: 1.75rem;
+    padding-bottom: .75rem;
+    margin-bottom: 0;
+    overflow-x: auto;
+    border-bottom: 1px solid #ece7df;
+    scrollbar-width: none;
+}
+
+.shop-filter-bar__tabs::-webkit-scrollbar {
+    display: none;
+}
+
+.shop-filter-tab {
+    position: relative;
+    flex-shrink: 0;
+    padding: 0 0 .75rem;
+    background: none;
+    border: 0;
+    color: #767676;
+    font-size: .8125rem;
+    font-weight: 600;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: color .2s ease;
+}
+
+.shop-filter-tab:hover {
+    color: #1f1f1f;
+}
+
+.shop-filter-tab.is-active {
+    color: #1f1f1f;
+}
+
+.shop-filter-tab.is-active::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: -1px;
+    left: 0;
+    height: 2px;
+    background-color: #c32929;
+}
+
+.shop-filter-bar__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .625rem;
+    padding-top: 1rem;
+    animation: shopFilterTagsFade .18s ease;
+}
+
+.shop-filter-chip {
+    padding: .5rem 1.125rem;
+    background-color: #faf9f8;
+    border: 1px solid #e4e4e4;
+    border-radius: 2rem;
+    color: #4f4b47;
+    font-size: .8125rem;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color .2s ease, border-color .2s ease, color .2s ease;
+}
+
+.shop-filter-chip:hover {
+    border-color: #1f1f1f;
+    color: #1f1f1f;
+}
+
+.shop-filter-chip.is-active {
+    background-color: #1f1f1f;
+    border-color: #1f1f1f;
+    color: #fff;
+}
+
+@keyframes shopFilterTagsFade {
+    from {
+        opacity: 0;
+        transform: translateY(.25rem);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 575.98px) {
+    .shop-filter-bar__tabs {
+        gap: 1.25rem;
+    }
+
+    .shop-filter-chip {
+        padding: .4375rem .875rem;
+        font-size: .75rem;
+    }
+}
