@@ -118,8 +118,13 @@
           });
         });
 
+        var requestedCategory = new URLSearchParams(window.location.search).get('category');
+        var requestedTab = requestedCategory
+          ? tabs.querySelector('.shop-filter-tab[data-category="' + requestedCategory + '"]')
+          : null;
         var firstCategoryTab = tabs.querySelector('.shop-filter-tab:not([data-category="all"])');
-        setActiveCategory(firstCategoryTab ? firstCategoryTab.dataset.category : 'all');
+
+        setActiveCategory(requestedTab ? requestedTab.dataset.category : (firstCategoryTab ? firstCategoryTab.dataset.category : 'all'));
       });
     </script>
   @endif
