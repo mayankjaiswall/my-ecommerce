@@ -47,8 +47,19 @@
                 @foreach ($categories as $category)
                     <tr data-status="{{ $category->is_active ? 'active' : 'inactive' }}">
                         <td data-order="{{ $category->category_name }}">
-                            <div class="admin-table-category__name">{{ $category->category_name }}</div>
-                            <div class="admin-table-category__slug">/{{ $category->slug }}</div>
+                            <div class="admin-table-category">
+                                <span class="admin-avatar admin-avatar--square">
+                                    @if ($category->image_url)
+                                        <img src="{{ $category->image_url }}" alt="{{ $category->category_name }}">
+                                    @else
+                                        {{ strtoupper(substr($category->category_name, 0, 1)) }}
+                                    @endif
+                                </span>
+                                <div>
+                                    <div class="admin-table-category__name">{{ $category->category_name }}</div>
+                                    <div class="admin-table-category__slug">/{{ $category->slug }}</div>
+                                </div>
+                            </div>
                         </td>
                         <td data-order="{{ $category->is_active ? 1 : 0 }}">
                             @if ($category->is_active)

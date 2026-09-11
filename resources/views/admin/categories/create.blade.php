@@ -17,37 +17,60 @@
             </div>
         </div>
 
-        <form method="POST" action="{{ route('admin.categories.store') }}" class="admin-form">
+        <form method="POST" action="{{ route('admin.categories.store') }}" class="admin-form" enctype="multipart/form-data">
             @csrf
 
-            <div class="admin-form-grid">
-                <div class="admin-form-row">
-                    <label for="category_name" class="admin-form-label">Category Name</label>
-                    <input type="text" id="category_name" name="category_name" class="admin-form-input @error('category_name') is-invalid @enderror"
-                        value="{{ old('category_name') }}" required autocomplete="off" autofocus>
-                    @error('category_name')
-                        <span class="admin-form-error">{{ $message }}</span>
-                    @enderror
+            <div class="admin-form-media-grid">
+                <div class="admin-form-media-grid__fields">
+                    <div class="admin-form-row">
+                        <label for="category_name" class="admin-form-label">Category Name</label>
+                        <input type="text" id="category_name" name="category_name" class="admin-form-input @error('category_name') is-invalid @enderror"
+                            value="{{ old('category_name') }}" required autocomplete="off" autofocus>
+                        @error('category_name')
+                            <span class="admin-form-error">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="admin-form-row">
+                        <label for="slug" class="admin-form-label">Slug</label>
+                        <input type="text" id="slug" name="slug" class="admin-form-input @error('slug') is-invalid @enderror"
+                            value="{{ old('slug') }}" placeholder="auto-generated-from-name" autocomplete="off">
+                        <span class="admin-form-hint">Used in the category URL. Leave blank to auto-generate from the name.</span>
+                        @error('slug')
+                            <span class="admin-form-error">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="admin-form-row">
+                        <label for="description" class="admin-form-label">Description</label>
+                        <textarea id="description" name="description" rows="6" class="admin-form-input @error('description') is-invalid @enderror"
+                            placeholder="Optional short description shown on the storefront">{{ old('description') }}</textarea>
+                        @error('description')
+                            <span class="admin-form-error">{{ $message }}</span>
+                        @enderror
+                    </div>
                 </div>
 
                 <div class="admin-form-row">
-                    <label for="slug" class="admin-form-label">Slug</label>
-                    <input type="text" id="slug" name="slug" class="admin-form-input @error('slug') is-invalid @enderror"
-                        value="{{ old('slug') }}" placeholder="auto-generated-from-name" autocomplete="off">
-                    <span class="admin-form-hint">Used in the category URL. Leave blank to auto-generate from the name.</span>
-                    @error('slug')
-                        <span class="admin-form-error">{{ $message }}</span>
-                    @enderror
+                    <label class="admin-form-label">Category Image</label>
+                    <div class="admin-image-uploader">
+                        <div class="admin-image-dropzone" id="categoryImageDropzone">
+                            <span class="admin-image-dropzone-preview" id="categoryImagePreview">
+                                <span class="admin-image-dropzone-placeholder">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 8.25 12 3.75m0 0L7.5 8.25M12 3.75v12" />
+                                    </svg>
+                                    <span>Click to upload image</span>
+                                </span>
+                            </span>
+                            <input type="file" id="categoryImageInput" name="image" accept="image/png,image/jpeg,image/webp" class="admin-image-dropzone-input">
+                        </div>
+                        <span class="admin-form-hint">JPG, PNG or WEBP. Max 2MB.</span>
+                        @error('image')
+                            <span class="admin-form-error">{{ $message }}</span>
+                        @enderror
+                    </div>
                 </div>
-            </div>
-
-            <div class="admin-form-row">
-                <label for="description" class="admin-form-label">Description</label>
-                <textarea id="description" name="description" rows="8" class="admin-form-input @error('description') is-invalid @enderror"
-                    placeholder="Optional short description shown on the storefront">{{ old('description') }}</textarea>
-                @error('description')
-                    <span class="admin-form-error">{{ $message }}</span>
-                @enderror
             </div>
 
             <div class="admin-form-actions admin-form-actions--split">
@@ -83,6 +106,25 @@
                 if (!slugEditedManually) {
                     slugInput.value = slugify(nameInput.value);
                 }
+            });
+        })();
+
+        (function () {
+            var input = document.getElementById('categoryImageInput');
+            var preview = document.getElementById('categoryImagePreview');
+
+            input.addEventListener('change', function () {
+                var file = input.files && input.files[0];
+
+                if (!file) {
+                    return;
+                }
+
+                var reader = new FileReader();
+                reader.onload = function (event) {
+                    preview.innerHTML = '<img src="' + event.target.result + '" alt="Preview">';
+                };
+                reader.readAsDataURL(file);
             });
         })();
     </script>
