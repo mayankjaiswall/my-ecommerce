@@ -280,6 +280,57 @@
       .wishlist-toggle-btn.active {
         color: #d6001c;
       }
+
+      .category-nav__viewport {
+        padding: 0 2rem;
+      }
+
+      .category-nav .swiper-wrapper {
+        align-items: center;
+      }
+
+      .category-nav .category-nav__slide {
+        width: auto;
+      }
+
+      .category-nav .navigation__link {
+        white-space: nowrap;
+      }
+
+      .category-nav__arrow {
+        position: absolute;
+        top: 50%;
+        z-index: 1;
+        display: flex;
+        width: 1.5rem;
+        height: 1.5rem;
+        padding: 0;
+        align-items: center;
+        justify-content: center;
+        background-color: #ffffff;
+        border: 1px solid #e4e4e4;
+        border-radius: 100%;
+        color: #767676;
+        transform: translateY(-50%);
+      }
+
+      .category-nav__arrow:hover {
+        border-color: #1f1f1f;
+        color: #1f1f1f;
+      }
+
+      .category-nav__prev {
+        left: 0;
+      }
+
+      .category-nav__next {
+        right: 0;
+      }
+
+      .category-nav__arrow.swiper-button-disabled {
+        opacity: .35;
+        pointer-events: none;
+      }
     </style>
     <div class="header-mobile header_sticky">
       <div class="container d-flex align-items-center h-100">
@@ -525,27 +576,44 @@
           </div>
         </div>
 
-        <nav class="navigation site-header__nav">
-          <ul class="navigation__list list-unstyled d-flex">
-            <li class="navigation__item">
-              <a href="{{ route('home') }}" class="navigation__link {{ request()->routeIs('home') ? 'is-active' : '' }}">Home</a>
-            </li>
-            <li class="navigation__item">
-              <a href="{{ route('shop') }}" class="navigation__link {{ request()->routeIs('shop') ? 'is-active' : '' }}">Shop</a>
-            </li>
-            <li class="navigation__item">
-              <a href="{{ route('about') }}" class="navigation__link {{ request()->routeIs('about') ? 'is-active' : '' }}">About</a>
-            </li>
-            <li class="navigation__item">
-              <a href="{{ route('contact') }}" class="navigation__link {{ request()->routeIs('contact') ? 'is-active' : '' }}">Contact</a>
-            </li>
-            <li class="navigation__item">
-              <a href="{{ route('wishlist') }}" class="navigation__link {{ request()->routeIs('wishlist') ? 'is-active' : '' }}">Wishlist</a>
-            </li>
-            <li class="navigation__item">
-              <a href="{{ route('cart') }}" class="navigation__link {{ request()->routeIs('cart') ? 'is-active' : '' }}">Cart</a>
-            </li>
-          </ul>
+        <nav class="navigation site-header__nav category-nav">
+          <div class="category-nav__viewport position-relative">
+            <div class="swiper-container js-swiper-slider category-nav__slider" data-settings='{
+                "slidesPerView": "auto",
+                "spaceBetween": 8,
+                "loop": false,
+                "navigation": {
+                  "nextEl": ".category-nav__next",
+                  "prevEl": ".category-nav__prev"
+                }
+              }'>
+              <div class="swiper-wrapper">
+                @forelse (($navCategories ?? collect()) as $category)
+                  <div class="swiper-slide category-nav__slide">
+                    <a href="{{ route('shop', ['category' => $category->slug]) }}"
+                      class="navigation__link {{ request()->query('category') === $category->slug ? 'is-active' : '' }}">
+                      {{ \Illuminate\Support\Str::title(\Illuminate\Support\Str::lower($category->category_name)) }}
+                    </a>
+                  </div>
+                @empty
+                  <div class="swiper-slide category-nav__slide">
+                    <a href="{{ route('shop') }}" class="navigation__link">Shop All</a>
+                  </div>
+                @endforelse
+              </div>
+            </div>
+
+            <button type="button" class="category-nav__arrow category-nav__prev" aria-label="Scroll categories left">
+              <svg width="8" height="12" viewBox="0 0 7 11" xmlns="http://www.w3.org/2000/svg">
+                <use href="#icon_prev_sm" />
+              </svg>
+            </button>
+            <button type="button" class="category-nav__arrow category-nav__next" aria-label="Scroll categories right">
+              <svg width="8" height="12" viewBox="0 0 7 11" xmlns="http://www.w3.org/2000/svg">
+                <use href="#icon_next_sm" />
+              </svg>
+            </button>
+          </div>
         </nav>
        </div>
       </div>
