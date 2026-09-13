@@ -804,34 +804,6 @@
     left: auto;
 }
 
-.site-header__nav {
-    border-top: 1px solid #ece7df;
-}
-
-.site-header__nav .navigation__list {
-    justify-content: center;
-    overflow-x: auto;
-    scrollbar-width: none;
-}
-
-.site-header__nav .navigation__list::-webkit-scrollbar {
-    display: none;
-}
-
-.site-header__nav .navigation__link {
-    padding-top: .75rem;
-    padding-bottom: .75rem;
-    font-size: .8125rem;
-}
-
-.site-header__nav .navigation__link.is-active {
-    color: #c32929;
-}
-
-.site-header__nav .navigation__link.is-active::after {
-    width: 2em;
-}
-
 /* ---------------- Site Header (Nav Drawer) ---------------- */
 .site-drawer__logo {
     max-width: 150px;
@@ -856,6 +828,36 @@
 .site-drawer__link.is-active {
     color: #c32929;
     padding-left: .375rem;
+}
+
+.site-drawer__heading {
+    margin-bottom: .75rem;
+    font-size: .75rem;
+    letter-spacing: .04em;
+}
+
+.site-drawer__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0 1.25rem;
+}
+
+.site-drawer__grid-link {
+    display: block;
+    padding: .625rem 0;
+    color: #1f1f1f;
+    font-weight: 500;
+    font-size: .8125rem;
+    text-transform: uppercase;
+    letter-spacing: .02em;
+    text-decoration: none;
+    border-bottom: 1px solid #f0ede7;
+    transition: color .2s ease;
+}
+
+.site-drawer__grid-link:hover,
+.site-drawer__grid-link.is-active {
+    color: #c32929;
 }
 
 /* ---------------- Shop Filter Bar (Category Tabs + Tag Chips) ---------------- */
