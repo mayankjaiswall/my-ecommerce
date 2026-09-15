@@ -36,6 +36,11 @@ class Category extends Model
         return $this->hasMany(Tag::class);
     }
 
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
     public static function uniqueSlug(string $name, ?int $ignoreId = null): string
     {
         $slug = Str::slug($name);
