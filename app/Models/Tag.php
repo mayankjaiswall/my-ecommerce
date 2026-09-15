@@ -26,6 +26,11 @@ class Tag extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
     public static function uniqueSlug(string $name, ?int $ignoreId = null): string
     {
         $slug = Str::slug($name);
