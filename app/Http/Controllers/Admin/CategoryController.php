@@ -96,6 +96,10 @@ class CategoryController extends Controller
 
     public function destroy(Category $category): RedirectResponse
     {
+        if ($category->products()->exists()) {
+            return redirect()->route('admin.categories.index')->with('status', 'category-has-products');
+        }
+
         if ($category->image) {
             Storage::disk('public')->delete($category->image);
         }
