@@ -84,14 +84,13 @@
                     </svg>
                     <span class="admin-nav-link__label">Tags</span>
                 </a>
-                <span class="admin-nav-link is-disabled" title="Products">
+                <a href="{{ route('admin.products.index') }}" class="admin-nav-link {{ request()->routeIs('admin.products.*') ? 'is-active' : '' }}" title="Products">
                     <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M2.5 6.25 10 2.5l7.5 3.75-7.5 3.75-7.5-3.75Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
                         <path d="M2.5 6.25V13.75L10 17.5l7.5-3.75V6.25M10 10v7.5" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
                     </svg>
                     <span class="admin-nav-link__label">Products</span>
-                    <span class="admin-soon">Soon</span>
-                </span>
+                </a>
                 <span class="admin-nav-link is-disabled" title="Orders">
                     <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M2.5 5h15M5 5V3.333A1.667 1.667 0 0 1 6.667 1.667h6.666A1.667 1.667 0 0 1 15 3.333V5m2.5 0-.833 11.25A1.667 1.667 0 0 1 15 17.917H5a1.667 1.667 0 0 1-1.667-1.667L2.5 5h15Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
