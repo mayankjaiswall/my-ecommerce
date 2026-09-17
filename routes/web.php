@@ -4,6 +4,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\Admin\TagController as AdminTagController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
@@ -68,6 +69,14 @@ Route::middleware('admin')->group(function () {
     Route::put('/admin/categories/{category}', [AdminCategoryController::class, 'update'])->name('admin.categories.update');
     Route::patch('/admin/categories/{category}/toggle-status', [AdminCategoryController::class, 'toggleStatus'])->name('admin.categories.toggle-status');
     Route::delete('/admin/categories/{category}', [AdminCategoryController::class, 'destroy'])->name('admin.categories.destroy');
+
+    Route::get('/admin/products', [AdminProductController::class, 'index'])->name('admin.products.index');
+    Route::get('/admin/products/create', [AdminProductController::class, 'create'])->name('admin.products.create');
+    Route::post('/admin/products', [AdminProductController::class, 'store'])->name('admin.products.store');
+    Route::get('/admin/products/{product}/edit', [AdminProductController::class, 'edit'])->name('admin.products.edit');
+    Route::put('/admin/products/{product}', [AdminProductController::class, 'update'])->name('admin.products.update');
+    Route::patch('/admin/products/{product}/toggle-status', [AdminProductController::class, 'toggleStatus'])->name('admin.products.toggle-status');
+    Route::delete('/admin/products/{product}', [AdminProductController::class, 'destroy'])->name('admin.products.destroy');
 
     Route::get('/admin/tags', [AdminTagController::class, 'index'])->name('admin.tags.index');
     Route::get('/admin/tags/create', [AdminTagController::class, 'create'])->name('admin.tags.create');
