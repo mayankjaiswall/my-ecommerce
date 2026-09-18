@@ -15,6 +15,8 @@
         <div class="admin-alert admin-alert--success">Category has been deactivated.</div>
     @elseif (session('status') === 'category-deleted')
         <div class="admin-alert admin-alert--success">Category has been deleted.</div>
+    @elseif (session('status') === 'category-has-products')
+        <div class="admin-alert admin-alert--danger">This category has products assigned to it. Reassign or remove those products before deleting it.</div>
     @endif
 
     <div class="admin-toolbar admin-toolbar--split">
