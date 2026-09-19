@@ -3,9 +3,12 @@
 :root {
   --admin-bg: #faf9f8;
   --admin-surface: #ffffff;
-  --admin-border: #ece7df;
+  --admin-border: #ddd6c8;
+  --admin-input-bg: #fbfaf7;
+  --admin-input-border: #c7bfab;
+  --admin-input-border-hover: #a89f88;
   --admin-text: #1f1f1f;
-  --admin-text-muted: #767676;
+  --admin-text-muted: #5f5c54;
   --admin-primary: #1f1f1f;
   --admin-primary-dark: #000000;
   --admin-primary-light: #f3f1ec;
@@ -36,6 +39,9 @@ html.admin-theme-dark {
   --admin-bg: #121212;
   --admin-surface: #1a1a1a;
   --admin-border: #2e2e2c;
+  --admin-input-bg: #1f1f1d;
+  --admin-input-border: #3a3a37;
+  --admin-input-border-hover: #55534c;
   --admin-text: #f0eee9;
   --admin-text-muted: #9a968c;
   --admin-primary: #f0eee9;
@@ -793,8 +799,8 @@ html.admin-theme-dark .admin-theme-toggle__icon--sun {
 }
 
 .admin-form-label {
-  font-size: 12px;
-  font-weight: 500;
+  font-size: 12.5px;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.03em;
   color: var(--admin-text);
@@ -803,13 +809,23 @@ html.admin-theme-dark .admin-theme-toggle__icon--sun {
 .admin-form-input {
   width: 100%;
   padding: 10px 14px;
-  border: 1px solid var(--admin-border);
+  border: 1.5px solid var(--admin-input-border);
   border-radius: var(--admin-radius-sm);
   font-family: var(--admin-font);
   font-size: 13.5px;
   color: var(--admin-text);
-  background: var(--admin-surface);
+  background: var(--admin-input-bg);
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.admin-form-input::placeholder,
+.admin-form-input::-webkit-input-placeholder {
+  color: var(--admin-text-muted);
+  opacity: 1;
+}
+
+.admin-form-input:hover {
+  border-color: var(--admin-input-border-hover);
 }
 
 .admin-form-input:focus {
@@ -1040,12 +1056,22 @@ html.admin-theme-dark .admin-theme-toggle__icon--sun {
 .admin-search-input,
 .admin-filter-select {
   padding: 10px 14px;
-  border: 1px solid var(--admin-border);
+  border: 1.5px solid var(--admin-input-border);
   border-radius: var(--admin-radius-sm);
   font-family: var(--admin-font);
   font-size: 13px;
   color: var(--admin-text);
-  background: var(--admin-surface);
+  background: var(--admin-input-bg);
+}
+
+.admin-search-input::placeholder {
+  color: var(--admin-text-muted);
+  opacity: 1;
+}
+
+.admin-search-input:hover,
+.admin-filter-select:hover {
+  border-color: var(--admin-input-border-hover);
 }
 
 .admin-search-input {
@@ -1251,13 +1277,13 @@ html.admin-theme-dark .admin-theme-toggle__icon--sun {
   position: relative;
   flex: 1;
   min-height: 220px;
-  border: 1.5px dashed var(--admin-border);
+  border: 2px dashed var(--admin-input-border);
   border-radius: var(--admin-radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: var(--admin-bg);
+  background: var(--admin-input-bg);
   overflow: hidden;
   transition: border-color 0.15s ease, background-color 0.15s ease;
 }
@@ -1342,8 +1368,8 @@ html.admin-theme-dark .admin-theme-toggle__icon--sun {
   aspect-ratio: 1 / 1;
   border-radius: var(--admin-radius-sm);
   overflow: hidden;
-  border: 1px solid var(--admin-border);
-  background: var(--admin-bg);
+  border: 1.5px solid var(--admin-input-border);
+  background: var(--admin-input-bg);
 }
 
 .admin-gallery-item img {
@@ -1388,8 +1414,9 @@ html.admin-theme-dark .admin-theme-toggle__icon--sun {
   align-items: center;
   justify-content: center;
   gap: 4px;
-  border: 1.5px dashed var(--admin-border);
+  border: 2px dashed var(--admin-input-border);
   border-radius: var(--admin-radius-sm);
+  background: var(--admin-input-bg);
   color: var(--admin-text-muted);
   font-size: 11px;
   font-weight: 500;
