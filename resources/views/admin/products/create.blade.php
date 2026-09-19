@@ -112,7 +112,7 @@
                             </span>
                             <input type="file" id="productImageInput" name="image" accept="image/png,image/jpeg,image/webp" class="admin-image-dropzone-input">
                         </div>
-                        <span class="admin-form-hint">JPG, PNG or WEBP. Max 2MB.</span>
+                        <span class="admin-form-hint">JPG, PNG or WEBP. Max 5MB.</span>
                         @error('image')
                             <span class="admin-form-error">{{ $message }}</span>
                         @enderror

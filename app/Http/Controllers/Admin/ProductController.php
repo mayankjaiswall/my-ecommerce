@@ -146,10 +146,10 @@ class ProductController extends Controller
             'compare_price' => ['nullable', 'numeric', 'min:0', 'gt:price'],
             'stock_quantity' => ['required', 'integer', 'min:0'],
             'low_stock_threshold' => ['required', 'integer', 'min:0'],
-            'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
             'remove_image' => ['nullable', 'boolean'],
             'gallery_images' => ['nullable', 'array'],
-            'gallery_images.*' => ['image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'gallery_images.*' => ['image', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
             'remove_gallery_images' => ['nullable', 'array'],
             'remove_gallery_images.*' => ['integer', 'exists:product_images,id'],
         ]);
