@@ -91,13 +91,13 @@
                     </svg>
                     <span class="admin-nav-link__label">Products</span>
                 </a>
-                <span class="admin-nav-link is-disabled" title="Orders">
+                <!-- <span class="admin-nav-link is-disabled" title="Orders">
                     <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M2.5 5h15M5 5V3.333A1.667 1.667 0 0 1 6.667 1.667h6.666A1.667 1.667 0 0 1 15 3.333V5m2.5 0-.833 11.25A1.667 1.667 0 0 1 15 17.917H5a1.667 1.667 0 0 1-1.667-1.667L2.5 5h15Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
                     </svg>
                     <span class="admin-nav-link__label">Orders</span>
                     <span class="admin-soon">Soon</span>
-                </span>
+                </span> -->
             </nav>
 
             <div class="admin-sidebar__footer">
