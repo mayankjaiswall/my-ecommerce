@@ -14,16 +14,6 @@ use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
 Auth::routes();
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -42,26 +32,31 @@ Route::middleware('auth')->group(function () {
     Route::delete('/account/avatar', [AccountController::class, 'destroyAvatar'])->name('account.avatar.destroy');
 });
 
+//Admin Routes
 Route::get('/admin', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
 Route::redirect('/admin/login', '/admin');
 Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login.submit');
+
 
 Route::middleware('admin')->group(function () {
     Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
     Route::get('/admin-dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
 
+    //Admin Profile
     Route::get('/admin/profile', [AdminProfileController::class, 'edit'])->name('admin.profile.edit');
     Route::put('/admin/profile', [AdminProfileController::class, 'update'])->name('admin.profile.update');
     Route::put('/admin/profile/password', [AdminProfileController::class, 'updatePassword'])->name('admin.profile.password');
     Route::put('/admin/profile/avatar', [AdminProfileController::class, 'updateAvatar'])->name('admin.profile.avatar');
     Route::delete('/admin/profile/avatar', [AdminProfileController::class, 'destroyAvatar'])->name('admin.profile.avatar.destroy');
 
+    //Admin Users
     Route::get('/admin/users', [AdminUserController::class, 'index'])->name('admin.users.index');
     Route::get('/admin/users/{user}/edit', [AdminUserController::class, 'edit'])->name('admin.users.edit');
     Route::put('/admin/users/{user}', [AdminUserController::class, 'update'])->name('admin.users.update');
     Route::patch('/admin/users/{user}/toggle-status', [AdminUserController::class, 'toggleStatus'])->name('admin.users.toggle-status');
     Route::delete('/admin/users/{user}', [AdminUserController::class, 'destroy'])->name('admin.users.destroy');
 
+    //Admin Categories
     Route::get('/admin/categories', [AdminCategoryController::class, 'index'])->name('admin.categories.index');
     Route::get('/admin/categories/create', [AdminCategoryController::class, 'create'])->name('admin.categories.create');
     Route::post('/admin/categories', [AdminCategoryController::class, 'store'])->name('admin.categories.store');
@@ -70,6 +65,7 @@ Route::middleware('admin')->group(function () {
     Route::patch('/admin/categories/{category}/toggle-status', [AdminCategoryController::class, 'toggleStatus'])->name('admin.categories.toggle-status');
     Route::delete('/admin/categories/{category}', [AdminCategoryController::class, 'destroy'])->name('admin.categories.destroy');
 
+    //Admin Products
     Route::get('/admin/products', [AdminProductController::class, 'index'])->name('admin.products.index');
     Route::get('/admin/products/create', [AdminProductController::class, 'create'])->name('admin.products.create');
     Route::post('/admin/products', [AdminProductController::class, 'store'])->name('admin.products.store');
@@ -78,6 +74,7 @@ Route::middleware('admin')->group(function () {
     Route::patch('/admin/products/{product}/toggle-status', [AdminProductController::class, 'toggleStatus'])->name('admin.products.toggle-status');
     Route::delete('/admin/products/{product}', [AdminProductController::class, 'destroy'])->name('admin.products.destroy');
 
+    //Admin Tags
     Route::get('/admin/tags', [AdminTagController::class, 'index'])->name('admin.tags.index');
     Route::get('/admin/tags/create', [AdminTagController::class, 'create'])->name('admin.tags.create');
     Route::post('/admin/tags', [AdminTagController::class, 'store'])->name('admin.tags.store');
