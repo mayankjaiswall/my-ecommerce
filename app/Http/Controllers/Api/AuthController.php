@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -25,8 +24,7 @@ class AuthController extends Controller
             'password' => Hash::make($validated['password']),
         ]);
 
-        Auth::login($user);
-        $request->session()->regenerate();
+        $token = $user->createToken('app_user')->plainTextToken;
 
         return response()->json([
             'success' => true,
@@ -36,6 +34,8 @@ class AuthController extends Controller
                 'name' => $user->name,
                 'email' => $user->email,
             ],
+            'token' => $token,
+            'token_type' => 'Bearer',
         ], 201);
     }
 
@@ -46,16 +46,30 @@ class AuthController extends Controller
             'password' => ['required', 'string'],
         ]);
 
-        if (! Auth::attempt($credentials, $request->boolean('remember'))) {
+        $user = User::where('email', $credentials['email'])->first();
+
+        if (! $user || ! Hash::check($credentials['password'], $user->password)) {
             return response()->json([
                 'success' => false,
                 'message' => 'The provided credentials are incorrect.',
             ], 401);
         }
 
-        $request->session()->regenerate();
+        if (! $user->is_active) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Your account has been deactivated.',
+            ], 403);
+        }
 
-        $user = Auth::user();
+        if ($user->isAdmin()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'This account is not permitted to access the app.',
+            ], 403);
+        }
+
+        $token = $user->createToken('app_user')->plainTextToken;
 
         return response()->json([
             'success' => true,
@@ -65,6 +79,8 @@ class AuthController extends Controller
                 'name' => $user->name,
                 'email' => $user->email,
             ],
+            'token' => $token,
+            'token_type' => 'Bearer',
         ]);
     }
 
@@ -84,10 +100,7 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        Auth::guard('web')->logout();
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        $request->user()->currentAccessToken()->delete();
 
         return response()->json([
             'success' => true,
