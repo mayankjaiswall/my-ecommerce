@@ -19,6 +19,10 @@
         </div>
     @endif
 
+    @error('social_login')
+        <div class="alert alert-danger" role="alert">{{ $message }}</div>
+    @enderror
+
     <div class="alert alert-danger d-none" data-auth-general-error role="alert"></div>
 
     <form method="POST" action="{{ route('login') }}" class="auth-form" data-auth-form="login">
@@ -70,6 +74,27 @@
         <button type="submit" class="btn btn-dark w-100 text-uppercase fw-medium py-3">
             {{ __('Sign In') }}
         </button>
+
+        <div class="d-flex align-items-center gap-3 my-4" aria-hidden="true">
+            <span class="flex-grow-1 border-top"></span>
+            <span class="small text-secondary text-uppercase">{{ __('Or continue with') }}</span>
+            <span class="flex-grow-1 border-top"></span>
+        </div>
+
+        <div class="row g-2">
+            <div class="col-6">
+                <a href="{{ route('social.redirect', 'google') }}" class="btn btn-outline-dark w-100 py-2 d-flex align-items-center justify-content-center gap-2">
+                    <span class="fw-bold" aria-hidden="true">G</span>
+                    <span>{{ __('Google') }}</span>
+                </a>
+            </div>
+            <div class="col-6">
+                <a href="{{ route('social.redirect', 'facebook') }}" class="btn btn-outline-dark w-100 py-2 d-flex align-items-center justify-content-center gap-2">
+                    <span class="fw-bold" aria-hidden="true">f</span>
+                    <span>{{ __('Facebook') }}</span>
+                </a>
+            </div>
+        </div>
 
         @if (Route::has('register'))
             <p class="text-center text-secondary mt-4 mb-0">
