@@ -64,3 +64,14 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Social Login
+
+Google and Facebook sign-in are available on the web login page. Create OAuth apps with each provider and register these callback URLs:
+
+- `{APP_URL}/auth/google/callback`
+- `{APP_URL}/auth/facebook/callback`
+
+Set `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `GOOGLE_REDIRECT_URI`, `FACEBOOK_CLIENT_ID`, `FACEBOOK_CLIENT_SECRET`, and `FACEBOOK_REDIRECT_URI` in `.env`, then run `php artisan migrate` to create the social account mapping table.
+
+Native clients can exchange a provider SDK access token with `POST /api/auth/social/{provider}` using `{"access_token":"..."}`. Supported providers are `google` and `facebook`; a successful response contains the Sanctum bearer token. Accounts are matched by provider identity. An email already used by a password account is not automatically linked.
