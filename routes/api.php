@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\SocialAuthController;
 use App\Http\Controllers\Api\TagController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 //User Login Route
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:6,1');
+Route::post('/auth/social/{provider}', [SocialAuthController::class, 'login'])
+    ->whereIn('provider', ['google', 'facebook'])
+    ->middleware('throttle:6,1');
 
 //Categories API Routes
 Route::get('/categories', [CategoryController::class, 'index']);
