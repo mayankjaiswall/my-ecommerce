@@ -10,12 +10,12 @@ class HomeController extends Controller
 
     public function index()
     {
-        $categories = Category::where('is_active', true)
-            ->orderBy('category_name')
-            ->get();
+        // $categories = Category::where('is_active', true)
+        //     ->orderBy('category_name')
+        //     ->get();
 
         return view('index', [
-            'categories' => $categories,
+            // 'categories' => $categories,
         ]);
     }
 }
