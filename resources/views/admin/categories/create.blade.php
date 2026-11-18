@@ -10,12 +10,12 @@
     @endif
 
     <div class="admin-panel">
-        <div class="admin-panel__header">
+        <!-- <div class="admin-panel__header">
             <div>
                 <h3 class="admin-panel__title">Category Details</h3>
                 <p class="admin-panel__subtitle">Name, slug, and description</p>
             </div>
-        </div>
+        </div> -->
 
         <form method="POST" action="{{ route('admin.categories.store') }}" class="admin-form" enctype="multipart/form-data">
             @csrf
