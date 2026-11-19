@@ -21,7 +21,7 @@
               @endforeach
             </div>
 
-            <div class="shop-filter-bar__tags" id="shopTagRow">
+            <!-- <div class="shop-filter-bar__tags" id="shopTagRow">
               @foreach ($categories as $category)
                 @foreach ($category->tags as $tag)
                   <button type="button" class="shop-filter-chip" data-category="{{ $category->slug }}" data-tag="{{ $tag->slug }}">
@@ -29,7 +29,7 @@
                   </button>
                 @endforeach
               @endforeach
-            </div>
+            </div> -->
           </div>
         @endif
 
