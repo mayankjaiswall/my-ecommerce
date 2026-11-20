@@ -28,6 +28,7 @@ class CategoryController extends Controller
     {
         $category = Category::query()
             ->where('slug', $slug)
+            ->where('is_active', true)
             ->with([
                 'tags' => fn ($query) => $query
                     ->where('is_active', true)
