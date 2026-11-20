@@ -11,10 +11,9 @@ class CategoryController extends Controller
     public function index(): JsonResponse
     {
         $categories = Category::query()
-            ->where('is_active', true)
             ->with(['tags' => fn ($query) => $query
                 ->where('is_active', true)
-                ->orderBy('name')])
+                ->orderBy('id')])
             ->orderBy('category_name')
             ->get()
             ->map(fn (Category $category) => $this->categoryData($category, true));
@@ -29,7 +28,6 @@ class CategoryController extends Controller
     {
         $category = Category::query()
             ->where('slug', $slug)
-            ->where('is_active', true)
             ->with([
                 'tags' => fn ($query) => $query
                     ->where('is_active', true)
