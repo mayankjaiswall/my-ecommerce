@@ -18,7 +18,7 @@ class UserController extends Controller
     {
         return view('admin.users.index', [
             'users' => User::with('role')->latest()->get(),
-            'roles' => Role::orderBy('name')->get(),
+            'roles' => Role::orderBy('id')->get(),
         ]);
     }
 
@@ -26,7 +26,7 @@ class UserController extends Controller
     {
         return view('admin.users.edit', [
             'user' => $user,
-            'roles' => Role::orderBy('name')->get(),
+            'roles' => Role::orderBy('id')->get(),
         ]);
     }
 

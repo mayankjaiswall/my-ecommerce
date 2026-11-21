@@ -19,7 +19,7 @@ class ProductController extends Controller
     {
         return view('admin.products.index', [
             'products' => Product::with(['category', 'tag'])->latest()->get(),
-            'categories' => Category::orderBy('category_name')->get(),
+            'categories' => Category::orderBy('id')->get(),
         ]);
     }
 
